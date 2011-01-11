@@ -503,7 +503,7 @@ foreach($aA as $k=>$v){
    $v = hl_prot($v, $k);
    if($k == 'href'){ // X-spam
     if($C['anti_mail_spam'] && strpos($v, 'mailto:') === 0){
-     $v = str_replace('@', htmlspecialchars($C['anti_mail_spam']), $v);
+     $v = str_replace('@', htmlspecialchars($C['anti_mail_spam'], ENT_COMPAT, 'UTF-8'), $v);
     }elseif($C['anti_link_spam']){
      $r1 = $C['anti_link_spam'][1];
      if(!empty($r1) && preg_match($r1, $v)){continue;}
