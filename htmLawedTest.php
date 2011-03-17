@@ -12,7 +12,7 @@ Test htmLawed; user provides text input; input and processed input are shown as 
 
 // config
 $_errs = 0; // display PHP errors
-$_limit = 8000; // input character limit
+$_limit = 80000; // input character limit
 
 // more config
 $_hlimit = 1000; // input character limit for showing hexdumps
@@ -44,7 +44,7 @@ if(get_magic_quotes_gpc()){
  }
  ini_set('magic_quotes_gpc', 0);
 }
-set_magic_quotes_runtime(0);
+//set_magic_quotes_runtime(0);
 
 $_POST['enc'] = (isset($_POST['enc']) and preg_match('`^[-\w]+$`', $_POST['enc'])) ? $_POST['enc'] : 'utf-8';
 
