@@ -1,6 +1,6 @@
 /*
-htmLawed_TESTCASE.txt, 26 April 2010
-htmLawed 1.1.9.2, 26 April 2010
+htmLawed_TESTCASE.txt, 17 May 2010
+htmLawed 1.1.9.3, 17 May 2010
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -93,6 +93,15 @@ The PHP <s>software</s> script used for this <strike>web-page</strike> webpage i
 <p>navigate the site: <a href="1" shape="REct" coOrds="0,0,118,28">1</a> | <a href="3" shape="circle" coords="184,200,60">3</a> | <a href="4" shape="poly" coords="276,0,276,28,100,200,50,50,276,0">4</a></p>
 <area href="5" shape="Rect" coords="0,0,118,28">
 </map></object>
+
+<param name="name">value</param>
+
+<object id="obj1">
+   <param name="param1">
+   <object id="obj2">
+      <param name="param2">
+   </object>
+</object>
 
 <h6>Complex-4: nested and other tables</h6>
 
