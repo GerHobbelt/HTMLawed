@@ -1,6 +1,6 @@
 /*
 htmLawed_TESTCASE.txt, 3 July 2010
-htmLawed 1.1.9.4, 3 July 2010
+htmLawed 1.1.9.5, 6 July 2011
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
