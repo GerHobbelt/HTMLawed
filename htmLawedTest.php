@@ -1,8 +1,8 @@
 <?php
 
 /*
-htmLawedTest.php, 6 July 2011
-htmLawed 1.1.9.5, 6 July 2011
+htmLawedTest.php, 22 October 2011
+htmLawed 1.1.10, 22 October 2011
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -456,6 +456,7 @@ $cfg = array(
 'comment'=>array('4', 'nil', 'allow HTML comments', 'nil'),
 'css_expression'=>array('2', 'nil', 'allow dynamic expressions in CSS style properties', 'nil'),
 'deny_attribute'=>array('1', '0', 'denied attributes', '0', '50', '', 'these'),
+'direct_list_nest'=>array('2', 'nil', 'allow direct nesting of a list within another without requiring it to be a list item', 'nil'),
 'elements'=>array('', '', 'allowed elements', '50'),
 'hexdec_entity'=>array('3', '1', 'convert hexadecimal numeric entities to decimal ones, or vice versa', '0'),
 'hook'=>array('', '', 'name of hook function', '25'),

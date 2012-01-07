@@ -1,6 +1,6 @@
 /*
-htmLawed_TESTCASE.txt, 3 July 2010
-htmLawed 1.1.9.5, 6 July 2011
+htmLawed_TESTCASE.txt, 22 October 2011
+htmLawed 1.1.10, 22 October 2011
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -236,6 +236,11 @@ Invalid:</strong> <em <!-- check -->>comment in tag content</em>, <!--check-->
  <li>l3</li>
  <li>l4<ol><li>lo3</li><li>lo4<ol><li>lo5</li></ol></li></ol></li>
 </ul><br />
+<strong>Nested, directly</strong>: <ul>
+ <li>l1</li>
+ <ol>l2</ol>
+ <li>l3</li>
+</ul><br />
 <strong>Nested, close-tags omitted</strong>: <ul>
  <li>l1</li>
  <li>l2<ol><li>lo1<li>lo2</ol>
@@ -253,6 +258,13 @@ Invalid:</strong> <em <!-- check -->>comment in tag content</em>, <!--check-->
 			</form>
 		</li></ul>
 </td></tr></table></li></ol>
+
+<h6>Microdata</h6>
+
+<div itemscope itemtype="http://data-vocabulary.org/Person"> 
+I am <span itemprop="name">X</span> but people call me <span itemprop="nickname">Y</span>. 
+Find me at <a href="http://www.xy.com" itemprop="url">www.xy.com</a>
+</div>
 
 <h6>Non-English text-1</h6>
 

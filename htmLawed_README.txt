@@ -1,6 +1,6 @@
 /*
-htmLawed_README.txt, 6 July 2011
-htmLawed 1.1.9.5, 6 July 2011
+htmLawed_README.txt, 23 October 2011
+htmLawed 1.1.10, 22 October 2011
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -200,7 +200,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 == 2  Usage ========================================================oo
 
 
-  htmLawed should work with PHP 4.3 and higher. Either 'include()' the 'htmLawed.php' file or copy-paste the entire code.
+  htmLawed should work with PHP 4.4 and higher. Either 'include()' the 'htmLawed.php' file or copy-paste the entire code.
 
   To easily *test* htmLawed using a form-based interface, use the provided demo:- htmLawedTest.php ('htmLawed.php' and 'htmLawedTest.php' should be in the same directory on the web-server).
   
@@ -307,6 +307,12 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   '0' - none  *
   'string' - dictated by values in 'string'
   'on*' (like 'onfocus') attributes not allowed - "
+  
+  *direct_nest_list*
+  Allow direct nesting of a list within another without requiring it to be a list item; see section:- #3.3.4
+
+  '0' - no  *
+  '1' - yes
 
   *elements*
   Allowed HTML elements; see section:- #3.3
@@ -471,7 +477,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   `Rule`: 'input=title(), value(maxval=8/default=6)'
   `Output`: '<input title="WIDTH" value="6" /><input title="length" value="5" />'
 
-  `Rule`: 'input=title(nomatch=$w.d$i), value(match=$em$/default=6em)'
+  `Rule`: 'input=title(nomatch=%w.d%i), value(match=%em%/default=6em)'
   `Output`: '<input value="10em" /><input title="length" value="6em" />'
 
   `Rule`: 'input=title(oneof=height|depth/default=depth), value(noneof=5|6)'
@@ -935,6 +941,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   In some cases, the specs stipulate the number and/or the ordering of the child elements. A 'table' can have 0 or 1 'caption', 'tbody', 'tfoot', and 'thead', but they must be in this order: 'caption', 'thead', 'tfoot', 'tbody'.
 
   htmLawed currently does not check for conformance to these rules. Note that any non-compliance in this regard will not introduce security vulnerabilities, crash browser applications, or affect the rendering of web-pages.
+  
+  With '$config["direct_list_nest"]' set to '1', htmLawed will allow direct nesting of an 'ol' or 'ul' list within another 'ol' or 'ul' without requiring the child list to be within an 'li' of the parent list. While this is not standard-compliant, directly nested lists are rendered properly by almost all browsers. The parameter '$config["direct_list_nest"]' has no effect if tag-balancing (section:- #3.3.3) is turned off.
 
 
 -- 3.3.5  Beautify or compact HTML ---------------------------------o
@@ -1204,6 +1212,9 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
       foreach($attribute_array as $k=>$v){
         $string .= " {$k}=\"{$v}\"";
       }
+      
+      static $empty_elements = array('area'=>1, 'br'=>1, 'col'=>1, 'embed'=>1, 'hr'=>1, 'img'=>1, 'input'=>1, 'isindex'=>1, 'param'=>1);
+
       return "<{$element}{$string}". (isset($in_array($element, $empty_elements) ? ' /' : ''). '>'. $new_element;
     }
 
@@ -1302,7 +1313,9 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   `Version number - Release date. Notes`
   
-  1.1.9.5 - 6 July 2011. Minor correction of a rule for nesting of 'li' within 'dir'.
+  1.1.10 - 22 October 2011. Fix for a bug in the 'tidy' functionality that caused the entire input to be replaced with a single space; new parameter, '$config["direct_list_nest"]' to allow direct descendance of a list in a list
+  
+  1.1.9.5 - 6 July 2011. Minor correction of a rule for nesting of 'li' within 'dir'
   
   1.1.9.4 - 3 July 2010. Parameter 'schemes' now accepts '!' so any URL, even a local one, can be `denied`. An issue in which a second URL value in 'style' properties was not checked was fixed.
   
@@ -1406,7 +1419,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 4.10  Acknowledgements ------------------------------------------o
 
 
-  Bryan Blakey, Pádraic Brady, Ulf Harnhammer, Gareth Heyes, Lukasz Pilorz, Shelley Powers, Edward Yang, and many anonymous users.
+  Nicholas Alipaz, Bryan Blakey, Pádraic Brady, Ulf Harnhammer, Gareth Heyes, Lukasz Pilorz, Shelley Powers, Edward Yang, and many anonymous users.
 
   Thank you!
 
