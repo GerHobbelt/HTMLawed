@@ -2,7 +2,7 @@
 
 /*
 htmLawedTest.php, 16 July 2009
-htmLawed 1.1.8.1, 16 July 2009
+htmLawed 1.1.9, 22 December 2009
 Copyright Santosh Patnaik
 GPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -132,7 +132,7 @@ function hexdump($d){
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo htmlspecialchars($_POST['enc']); ?>" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="description" content="htmLawed <?php echo hl_version();?> test page" />
 <style type="text/css"><!--/*--><![CDATA[/*><!--*/
 a, a.resizer{text-decoration:none;}
