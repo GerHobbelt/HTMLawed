@@ -1,7 +1,7 @@
 <?php
 
 /*
-htmLawed 1.1.8, 23 April 2009
+htmLawed 1.1.8.1, 16 July 2009
 Copyright Santosh Patnaik
 GPL v3 license
 A PHP Labware internal utility; www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -37,7 +37,7 @@ else{
 $C['elements'] =& $e;
 // config attrs
 $x = !empty($C['deny_attribute']) ? str_replace(array("\n", "\r", "\t", ' '), '', $C['deny_attribute']) : '';
-$x = array_flip((isset($x[0]) && $x[0] == '*') ? explode('-', $x) : explode(',', $x. ($C['safe'] == 1 ? ',on*' : '')));
+$x = array_flip((isset($x[0]) && $x[0] == '*') ? explode('-', $x) : explode(',', $x. (!empty($C['safe']) ? ',on*' : '')));
 if(isset($x['on*'])){
  unset($x['on*']);
  $x += array('onblur'=>1, 'onchange'=>1, 'onclick'=>1, 'ondblclick'=>1, 'onfocus'=>1, 'onkeydown'=>1, 'onkeypress'=>1, 'onkeyup'=>1, 'onmousedown'=>1, 'onmousemove'=>1, 'onmouseout'=>1, 'onmouseover'=>1, 'onmouseup'=>1, 'onreset'=>1, 'onselect'=>1, 'onsubmit'=>1);
@@ -690,7 +690,7 @@ return str_replace(array("\x01", "\x02", "\x03", "\x04", "\x05", "\x07"), array(
 
 function hl_version(){
 // rel
-return '1.1.8';
+return '1.1.8.1';
 // eof
 }
 

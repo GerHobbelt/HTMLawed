@@ -1,6 +1,6 @@
 /*
-htmLawed_README.txt, 23 April 2009
-htmLawed 1.1.8, 23 April 2009
+htmLawed_README.txt, 16 July 2009
+htmLawed 1.1.8.1, 16 July 2009
 Copyright Santosh Patnaik
 GPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -1240,7 +1240,9 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   (The release date for the downloadable package of files containing documentation, demo script, test-cases, etc., besides the 'htmLawed.php' file may be updated independently if the secondary files are revised.)
 
   `Version number - Release date. Notes`
-  
+
+  1.1.8.1 - 16 July 2009. Minor code-change to fix a PHP error notice
+
   1.1.8 - 23 April 2009. Parameter 'deny_attribute' now accepts the wild-card '*', making it simpler to specify its value when all but a few attributes are being denied; fixed a bug in interpreting '$spec'
 
   1.1.7 - 11-12 March 2009. Attributes globally denied through 'deny_attribute' can be allowed element-specifically through '$spec'; '$config["style_pass"]' allowing letting through any 'style' value introduced; altered logic to catch certain types of dynamic crafted CSS expressions
