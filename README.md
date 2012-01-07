@@ -21,6 +21,14 @@ This repository is ...
 ... a derivative, which closely tracks [the original](http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/)
 and may contain some additional tweaks and tugs for performance and/or filtering ability reasons.
 
+Current extra features compared to the original:
+
+* UTF-8 throughout: all HTML entity conversions are now performed in UTF-8 (instead of an arbitrary 
+  codepage; of course this assumes you'll feed the bugger UTF-8 (or what should be treated as UTF-8 
+  at least), as does its own test page.
+* the test page accepts up to 10x larger inputs than the original test page (so you can run a test on 
+  large chunks of copy through the form)
+
 
 
 Links
