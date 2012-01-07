@@ -1,6 +1,6 @@
 /*
-htmLawed_TESTCASE.txt, 17 May 2010
-htmLawed 1.1.9.3, 17 May 2010
+htmLawed_TESTCASE.txt, 3 July 2010
+htmLawed 1.1.9.4, 3 July 2010
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -332,6 +332,7 @@ na Alemanha.
 <strong>Relative and absolute:</strong> <a href="mailto:x"></a>, <a href="http://a.com/b/c/d.f"></a>, <a href="./../d.f"></a>, <a href="./d.f"></a>, <a href="d.f"></a>, <a href="#s"></a>, <a href="./../../d.f#s"></a><br />
 (try base URL value of 'http://a.com/b/')<br />
 <strong>CSS URLs:</strong> <div style="background-image: url('a.gif');"></div>, <div style="background-image: URL(&quot;a.gif&quot;);"></div>, <div style="background-image: url('http://a.com/a.gif');"></div>, <div style="background-image: url('./../a.gif');"></div>, <div style="background-image: &#117;r&#x6C;('js&#58;xss'&#x29;"></div><br />
+<strong>Double URLs:</strong> <a style="behaviour: url(foo) url(http://example.com/xss.htc)">b</a><br />
 <strong>Anti-spam:</strong> (try regex for 'http://a.com', etc.) <a href="mailto:x@y.com"></a>, <a href="http://a.com/b@d.f"></a>, <a href="a.com/d.f" rel="nofollow"></a>, <a href="a.com/d.f" rel="1, 2"></a>, <a href="a.com/d.f"></a>, <a href="b.com/d.f"></a>, <a href="c.com/d.f">, <a href="denied:http://c.com/d.f"></a><br />
 
 <h6>XSS</h6>
