@@ -1,8 +1,8 @@
 <?php
 
 /*
-htmLawedTest.php, 31 January 2009
-htmLawed 1.1.6, 4 February 2009
+htmLawedTest.php, 11 March 2009
+htmLawed 1.1.7, 11 March 2009
 Copyright Santosh Patnaik
 GPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -22,7 +22,7 @@ $_sid = 'sid'; // session name; alphanum.
 $_slife = 30; // session life in min.
 
 // errors
-error_reporting(E_ALL | (defined('E_STRICT') ? E_STRICT : 0));
+error_reporting(E_ALL | (defined('E_STRICT') ? E_STRICT : 1));
 ini_set('display_errors', $_errs);
 
 // session
@@ -46,10 +46,12 @@ if(get_magic_quotes_gpc()){
 }
 set_magic_quotes_runtime(0);
 
+$_POST['enc'] = (isset($_POST['enc']) and preg_match('`^[-\w]+$`', $_POST['enc'])) ? $_POST['enc'] : 'utf-8';
+
 // token for anti-CSRF
 if(count($_POST)){
- if((empty($_GET['pre']) and ($_POST['token'] != $_SESSION['token'] or empty($_POST[$_sid]) or $_POST[$_sid] != session_id() or empty($_COOKIE[$_sid]) or $_COOKIE[$_sid] != session_id())) or ($_POST[$_sid] != session_id())){
-  $_POST = array();
+ if((empty($_GET['pre']) and ((!empty($_POST['token']) and !empty($_SESSION['token']) and $_POST['token'] != $_SESSION['token']) or empty($_POST[$_sid]) or $_POST[$_sid] != session_id() or empty($_COOKIE[$_sid]) or $_COOKIE[$_sid] != session_id())) or ($_POST[$_sid] != session_id())){
+  $_POST = array('enc'=>'utf-8');
  }
 }
 if(empty($_GET['pre'])){
@@ -70,7 +72,6 @@ if(isset($_POST['inputH'])){
 }
 
 // main
-$_POST['enc'] = isset($_POST['enc']) ? $_POST['enc'] : 'utf-8';
 $_POST['text'] = isset($_POST['text']) ? $_POST['text'] : 'text to process; < '. $_limit. ' characters'. ($_hlimit ? ' (for binary hexdump view, < '. $_hlimit. ')' : '');
 $do = (!empty($_POST[$_sid]) && isset($_POST['text'][0]) && !isset($_POST['text'][$_limit])) ? 1 : 0;
 $limit_exceeded = isset($_POST['text'][$_limit]) ? 1 : 0;
@@ -131,7 +132,7 @@ function hexdump($d){
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en" xml:lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo htmlspecialchars($_POST['enc'][3]); ?>" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo htmlspecialchars($_POST['enc']); ?>" />
 <meta name="description" content="htmLawed <?php echo hl_version();?> test page" />
 <style type="text/css"><!--/*--><![CDATA[/*><!--*/
 a, a.resizer{text-decoration:none;}
@@ -414,12 +415,12 @@ if($_w3c_validate && $validation){
 }
 else{
  if($_w3c_validate){
-  echo '<span style="float: right;" class="notice" title="for direct submission of input or output code to W3C validator for (X)HTML validation"><span style="font-size: 85%;">&nbsp;Validator tools: </span><input type="checkbox" value="1" name="w3c_validate" id="w3c_validate" style="vertical-align: middle;"', ($validation ? ' checked="checked"' : ''), ' /></span>';
+  echo '<span style="float: right;" class="help" title="for direct submission of input or output code to W3C validator for (X)HTML validation"><span style="font-size: 85%;">&nbsp;Validator tools: </span><input type="checkbox" value="1" name="w3c_validate" id="w3c_validate" style="vertical-align: middle;"', ($validation ? ' checked="checked"' : ''), ' /></span>';
  }
 }
 ?>
 
-<span style="float:right;" class="notice"><span style="font-size: 85%;">Encoding: </span><input type="text" size="8" id="enc" name="enc" style="vertical-align: middle;" value="<?php echo htmlspecialchars($_POST['enc']); ?>" title="IANA-recognized name of the input character-set; can be multiple ;- or space-separated values" /></span>
+<span style="float:right;" class="help"><span style="font-size: 85%;">Encoding: </span><input type="text" size="8" id="enc" name="enc" style="vertical-align: middle;" value="<?php echo htmlspecialchars($_POST['enc']); ?>" title="IANA-recognized name of the input character-set; can be multiple ;- or space-separated values; may not work in some browsers" /></span>
 
 </div>
 <br style="clear:both;" />
@@ -466,6 +467,7 @@ $cfg = array(
 'safe'=>array('2', '0', 'for most <em>safe</em> HTML', '0'),
 'schemes'=>array('', 'href: aim, feed, file, ftp, gopher, http, https, irc, mailto, news, nntp, sftp, ssh, telnet; *:file, http, https', 'allowed URL protocols', '50'),
 'show_setting'=>array('', 'htmLawed_setting', 'variable name to record <em>finalized</em> htmLawed settings', '25', 'd'=>1),
+'style_pass'=>array('2', 'nil', 'do not look at <em>style</em> attribute values', 'nil'),
 'tidy'=>array('3', '0', 'beautify/compact', '-1', '8', '1t1', 'format'),
 'unique_ids'=>array('2', '1', 'unique <em>id</em> values', '0', '8', 'my_', 'prefix'),
 'valid_xhtml'=>array('2', 'nil', 'auto-set various parameters for most valid XHTML', 'nil'),
@@ -562,7 +564,8 @@ else{
 <?php echo (file_exists('./htmLawed_TESTCASE.txt') ? '<br /><br />You can use text from <a href="htmLawed_TESTCASE.txt"><span class="notice">this collection of test-cases</span></a> in the input. Set the character encoding of the browser to Unicode/utf-8 before copying.' : ''); ?>
 
 <br /><br />For more about the anti-XSS capability of htmLawed, see <a href="http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/rsnake/RSnakeXSSTest.htm"><span class="notice">this page</span></a>.
-<br /><br />Change <em>Encoding</em> to reflect the character encoding of the input text. Even then, some characters may not display properly because of variable browser support and because of the form interface.
+<br /><br /><em>Submitted input will also be HTML-rendered (XHTML 1) after htmLawed-filtering.</em>
+<br /><br />Change <em>Encoding</em> to reflect the character encoding of the input text. Even then, it may not work or some characters may not display properly because of variable browser support and because of the form interface. Developers can write some PHP code to capture the filtered input to a file if this is important.
 <br /><br />Refer to the htmLawed documentation (<a href="htmLawed_README.htm"><span class="notice">htm</span></a>/<a href="htmLawed_README.txt"><span class="notice">txt</span></a>) for details about <em>Settings</em>, and htmLawed's behavior and limitations.
 <br /><br />For <em>Settings</em>, incorrectly-specified values like regular expressions are silently ignored. One or more settings form-fields may have been disabled.
 <br /><br />Hovering the mouse over some of the text can provide additional information in some browsers.

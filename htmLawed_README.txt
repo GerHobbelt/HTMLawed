@@ -1,6 +1,6 @@
 /*
-htmLawed_README.txt, 4 February 2009
-htmLawed 1.1.6, 4 February 2009
+htmLawed_README.txt, 11 March 2009
+htmLawed 1.1.7, 11 March 2009
 Copyright Santosh Patnaik
 GPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -385,6 +385,12 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   *show_setting*
   Name of a PHP variable to assign the `finalized` '$config' and '$spec' values; see section:- #3.8
 
+  *style_pass*
+  Do not look at 'style' attribute values, letting them through without any alteration
+
+  '0' - no *
+  '1' - htmLawed will let through any 'style' value; see section:- #3.4.8
+
   *tidy*
   Beautify or compact HTML code; see section:- #3.3.5
 
@@ -471,7 +477,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   *Special characters*: The characters ';', ',', '/', '(', ')', '|', '~' and space have special meanings in the rules. Words in the rules that use such characters, or the characters themselves, should be `escaped` by enclosing in pairs of double-quotes ('"'). A back-tick ('`') can be used to escape a literal '"'. An example rule illustrating this is 'input=value(maxlen=30/match="/^\w/"/default="your `"ID`"")'.
    
-  *Note*: To deny an attribute for all elements for which it is legal, '$config["deny_attribute"]' can be used instead of '$spec'. The 'hook_tag' parameter (section:- #3.4.9) can also be used to implement the '$spec' functionality.
+  *Note*: To deny an attribute for all elements for which it is legal, '$config["deny_attribute"]' (see section:- #3.4) can be used instead of '$spec'. Also, attributes can be allowed element-specifically through '$spec' while being denied globally through '$config["deny_attribute"]'. The 'hook_tag' parameter (section:- #3.4.9) can also be used to implement the '$spec' functionality.
 
 
 -- 2.4  Performance time & memory usage ----------------------------o
@@ -565,7 +571,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   *  For URLs, unless '$config["scheme"]' is appropriately set, writers should avoid using escape characters or entities in schemes. E.g., 'htt&#112;' (which many browsers will read as the harmless 'http') may be considered bad by htmLawed.
 
-  * htmLawed will attempt to put plain text present directly inside 'blockquote', 'form', 'map' and 'noscript' elements (illegal as per the specs) inside auto-generated 'div' elements.
+  *  htmLawed will attempt to put plain text present directly inside 'blockquote', 'form', 'map' and 'noscript' elements (illegal as per the specs) inside auto-generated 'div' elements.
 
 
 -- 2.8  Limitations & work-arounds ---------------------------------o
@@ -603,7 +609,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   *  htmLawed does not check the number of nested elements. E.g., it will allow two 'caption' elements in a 'table' element, illegal as per the specs. Admins may be able to use a custom hook function to enforce such checks ('hook_tag' parameter; see section:- #3.4.9).
 
-  *  When dynamic CSS expressions in 'style' aren't being permitted, htmLawed will empty the entire attribute value if it detects maliciously crafted expression declarations like 'exp/**/ression...' aimed at exploiting browser bugs. If this is too harsh, admins should allow CSS expressions through htmLawed core but then use a custom function through the 'hook_tag' parameter (section:- #3.4.9) to more specifically identify CSS expressions in the 'style' attribute values.
+  *  htmLawed might convert certain entities to actual characters and remove CSS comment-markers ('/*') in 'style' attribute values in order to detect malicious HTML like crafted IE-specific dynamic expressions like '&#101;xpression...'. If this is too harsh, admins can allow CSS expressions through htmLawed core but then use a custom function through the 'hook_tag' parameter (section:- #3.4.9) to more specifically identify CSS expressions in the 'style' attribute values. Also, using '$config["style_pass"]', it is possible to have htmLawed pass 'style' attribute values without even looking at them (section:- #3.4.8).
 
   *  htmLawed does not correct certain possible attribute-based security vulnerabilities (e.g., '<a href="http://x%22+style=%22background-image:xss">x</a>'). Theses arise when browsers mis-identify markup in `escaped` text, defeating the very purpose of escaping text (a bad browser will read the given example as '<a href="http://x" style="background-image:xss">x</a>').
   
@@ -899,6 +905,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   When '$config["deny_attribute"]' is not set, or set to '0', or empty ('""'), all the 111 attributes are permitted. Otherwise, '$config["deny_attribute"]' can be set as a list of comma-separated names of the denied attributes. 'on*' can be used to refer to the group of potentially dangerous, script-accepting attributes: 'onblur', 'onchange', 'onclick', 'ondblclick', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onreset', 'onselect' and 'onsubmit'.
 
+  Note that attributes specified in '$config["deny_attribute"]' are denied globally, for all elements. To deny attributes for only specific elements, '$spec' (see section:- #2.3) can be used. '$spec' can also be used to element-specifically permit an attribute otherwise denied through '$config["deny_attribute"]'.
+
   With '$config["safe"] = 1', the 'on*' attributes are automatically disallowed.
 
   htmLawed (function 'hl_tag()') also:
@@ -1092,9 +1100,11 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 3.4.8  Inline style properties ----------------------------------o
 
 
-  htmLawed can check URL schemes and dynamic expressions (to guard against Javascript, etc., script-based insecurities) in inline CSS style property values in the 'style' attributes. (CSS properties like 'background-image' that accept URLs in their values are noted in section:- #5.3.) Dynamic CSS expressions that allow scripting in browsers, and can be a vulnerability, can be removed from property values by setting '$config["css_expression"]' to '1'.
+  htmLawed can check URL schemes and dynamic expressions (to guard against Javascript, etc., script-based insecurities) in inline CSS style property values in the 'style' attributes. (CSS properties like 'background-image' that accept URLs in their values are noted in section:- #5.3.) Dynamic CSS expressions that allow scripting in the IE browser, and can be a vulnerability, can be removed from property values by setting '$config["css_expression"]' to '1' (default setting).
 
-  *Note*: Because of the various ways of representing characters in attribute values (URL-escapement, entitification, etc.), htmLawed might falsely identify dynamic CSS expressions and URL schemes in 'style' values and thus alter the values of the 'style' attributes. If this is an important issue, checking of URLs and dynamic expressions can be turned off ('$config["schemes"] = "...style:*..."', see section:- #3.4.3, and '$config["css_expression"] = 0'). Alternately, admins can use their own custom function for finer handling of 'style' values through the 'hook_tag' parameter (see section:- #3.4.9).
+  *Note*: Because of the various ways of representing characters in attribute values (URL-escapement, entitification, etc.), htmLawed might alter the values of the 'style' attribute values, and may even falsely identify dynamic CSS expressions and URL schemes in them. If this is an important issue, checking of URLs and dynamic expressions can be turned off ('$config["schemes"] = "...style:*..."', see section:- #3.4.3, and '$config["css_expression"] = 0'). Alternately, admins can use their own custom function for finer handling of 'style' values through the 'hook_tag' parameter (see section:- #3.4.9).
+
+  It is also possible to have htmLawed let through any 'style' value by setting '$config["style_pass"]' to '1'.
 
   As such, it is better to set up a CSS file with class declarations, disallow the 'style' attribute, set a '$spec' rule (see section:- #2.3) for 'class' for the 'oneof' or 'match' parameter, and ask writers to make use of the 'class' attribute.
 
@@ -1229,6 +1239,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   `Version number - Release date. Notes`
   
+  1.1.7 - 11 March 2009. Attributes globally denied through 'deny_attribute' can be allowed element-specifically through '$spec'; '$config["style_pass"]' allowing letting through any 'style' value introduced; altered logic to catch certain types of dynamic crafted CSS expressions
+
   1.1.3-6 - 28-31 January - 4 February 2009. Altered logic to catch certain types of dynamic crafted CSS expressions
 
   1.1.2 - 22 January 2009. Fixed bug in parsing of 'font' attributes during tag transformation
@@ -1315,7 +1327,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 4.10  Acknowledgements ------------------------------------------o
 
 
-  Bryan Blakey, Ulf Harnhammer, Lukasz Pilorz, Shelley Powers, Edward Yang, and many anonymous users.
+  Bryan Blakey, Ulf Harnhammer, Gareth Heyes, Lukasz Pilorz, Shelley Powers, Edward Yang, and many anonymous users.
 
   Thank you!
 

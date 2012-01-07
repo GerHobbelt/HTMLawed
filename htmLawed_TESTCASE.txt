@@ -1,6 +1,6 @@
 /*
-htmLawed_TESTCASE.txt, 31 January 2009
-htmLawed 1.1.6, 4 February 2009
+htmLawed_TESTCASE.txt, 11 March 2009
+htmLawed 1.1.7, 11 March 2009
 Copyright Santosh Patnaik
 GPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -339,6 +339,9 @@ src=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#1
 <div style="background-image: &#117;r&#x6C;('js&#58;xss'&#x29;"></div><br />
 <img style=color:expr/*comment*/ession(alert(document.domain))><br />
 <a style=";-moz-binding:url(http://lukasz.pilorz.net/xss/xss.xml#xss)" href="http://example.com">test</a><br />
+<strong>Bad IE7:</strong> <a href="xxx" style="background: exp&#x72;ession(alert('xss'));">xxx</a><br />
+<strong>Bad IE7:</strong> <a href="xxx" style="background: &#101;xpression(alert('xss'));">xxx</a><br />
+<strong>Bad IE7:</strong> <a href="xxx" style="background: %45xpression(alert('xss'));">xxx</a><br />
 <strong>Bad IE7:</strong> <a href="xxx" style="background:/**/expression(alert('xss'));">xxx</a><br />
 <strong>Bad IE7:</strong> <a href="xxx" style="background:/**/&#69;xpression(alert('xss'));">xxx</a><br />
 <strong>Bad IE7:</strong> <a href="xxx" style="background:/**/Exp&#x72;ession(alert('xss'));">xxx</a><br />
