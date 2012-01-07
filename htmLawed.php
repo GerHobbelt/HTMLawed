@@ -1,7 +1,7 @@
 <?php
 
 /*
-htmLawed 1.1.9.1, 26 February 2010
+htmLawed 1.1.9.2, 26 April 2010
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility; www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -295,20 +295,14 @@ function hl_cmtcd($t){
 // comment/CDATA sec handler
 $t = $t[0];
 global $C;
-if($t[3] == '-'){
- if(!$C['comment']){return $t;}
- if($C['comment'] == 1){return '';}
+if(!($v = $C[$n = $t[3] == '-' ? 'comment' : 'cdata'])){return $t;}
+if($v == 1){return '';}
+if($n == 'comment'){
  if(substr(($t = preg_replace('`--+`', '-', substr($t, 4, -3))), -1) != ' '){$t .= ' ';}
- $t = $C['comment'] == 2 ? str_replace(array('&', '<', '>'), array('&amp;', '&lt;', '&gt;'), $t) : $t;
- $t = "\x01\x02\x04!--$t--\x05\x02\x01";
-}else{ // CDATA
- if(!$C['cdata']){return $t;}
- if($C['cdata'] == 1){return '';}
- $t = substr($t, 1, -1);
- $t = $C['cdata'] == 2 ? str_replace(array('&', '<', '>'), array('&amp;', '&lt;', '&gt;'), $t) : $t;
- $t = "\x01\x01\x04$t\x05\x01\x01";
 }
-return str_replace(array('&', '<', '>'), array("\x03", "\x04", "\x05"), $t);
+else{$t = substr($t, 1, -1);}
+$t = $v == 2 ? str_replace(array('&', '<', '>'), array('&amp;', '&lt;', '&gt;'), $t) : $t;
+return str_replace(array('&', '<', '>'), array("\x03", "\x04", "\x05"), ($n == 'comment' ? "\x01\x02\x04!--$t--\x05\x02\x01" : "\x01\x01\x04$t\x05\x01\x01"));
 // eof
 }
 
@@ -334,7 +328,7 @@ global $C;
 $b = $a = '';
 if($c == null){$c = 'style'; $b = $p[1]; $a = $p[3]; $p = trim($p[2]);}
 $c = isset($C['schemes'][$c]) ? $C['schemes'][$c] : $C['schemes']['*'];
-if(isset($c['*']) or !strcspn($p, '#?;')){return "{$b}{$p}{$a}";} // All ok, frag, query, param
+if(isset($c['*']) or !strcspn($p, '#?;') or (substr($p, 0, 4) == 'deni')){return "{$b}{$p}{$a}";} // All ok, frag, query, param
 if(preg_match('`^([a-z\d\-+.&#; ]+?)(:|&#(58|x3a);|%3a|\\\\0{0,4}3a).`i', $p, $m) && !isset($c[strtolower($m[1])])){ // Denied prot
  return "{$b}denied:{$p}{$a}";
 }
@@ -688,7 +682,7 @@ return str_replace(array("\x01", "\x02", "\x03", "\x04", "\x05", "\x07"), array(
 
 function hl_version(){
 // rel
-return '1.1.9.1';
+return '1.1.9.2';
 // eof
 }
 

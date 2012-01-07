@@ -1,6 +1,6 @@
 /*
-htmLawed_README.txt, 26 February 2010
-htmLawed 1.1.9.1, 26 February 2010
+htmLawed_README.txt, 26 April 2010
+htmLawed 1.1.9.2, 26 April 2010
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -203,6 +203,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   htmLawed should work with PHP 4.3 and higher. Either 'include()' the 'htmLawed.php' file or copy-paste the entire code.
 
   To easily *test* htmLawed using a form-based interface, use the provided demo:- htmLawedTest.php ('htmLawed.php' and 'htmLawedTest.php' should be in the same directory on the web-server).
+  
+  *Note*: For code for usage of the htmLawed class (for htmLawed in OOP), please refer to the htmLawed:- http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed website; the filtering itself can be configured, etc., as described here.
 
 
 -- 2.1  Simple ------------------------------------------------------
@@ -1287,6 +1289,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   (The release date for the downloadable package of files containing documentation, demo script, test-cases, etc., besides the 'htmLawed.php' file may be updated independently if the secondary files are revised.)
 
   `Version number - Release date. Notes`
+  
+  1.1.9.2 - 26 April 2010. Minor fix regarding rendering of denied URL schemes
   
   1.1.9.1 - 26 February 2010. htmLawed now uses the LGPL version 3 license; support for 'flashvars' attribute for 'embed'
   

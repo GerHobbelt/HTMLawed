@@ -1,6 +1,6 @@
 /*
-htmLawed_TESTCASE.txt, 22 December 2009
-htmLawed 1.1.9.1, 26 February 2010
+htmLawed_TESTCASE.txt, 26 April 2010
+htmLawed 1.1.9.2, 26 April 2010
 Copyright Santosh Patnaik
 LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -181,10 +181,13 @@ text <img src="none" alt="none" /> 	<b>t<em> e <strong> x </strong> t</em></b>
 
 <h6>HTML comments (also CDATA)</h6>
 
-Special characters inside: <!-- <![CDATA check ]]> -->, <!-- 3 < 4 > 3.5, & 4 &gt; 4 -->, <!-- che--ck -->, <!--[if !IE]> <--><a>c</a><!--> <![endif]--><br />
-Normal: <!-- check -->, <!--check -->, <em>comment:<!-- check --></em><!-- check -->, <table><!-- check --><tr><td>text not allowed</td></tr></table><br />
-Malformed: <![cdata check ]]>, < ![CDATA check ]]>, < ![CDATA check ] ]><br />
-Invalid: <em <!-- check -->>comment in tag content</em>, <!--check-->
+<strong>Script inside:</strong> <!--[if gte IE 4]>
+<SCRIPT>alert('XSS');</SCRIPT>
+<![endif]--><br />
+<strong>Special characters inside: <!-- <![CDATA check ]]> -->, <!-- 3 < 4 > 3.5, & 4 &gt; 4 -->, <!-- che--ck -->, <!--[if !IE]> <--><a>c</a><!--> <![endif]--><br />
+<strong>Normal:</strong> <!-- check -->, <!--check -->, <em>comment:<!-- check --></em><!-- check -->, <table><!-- check --><tr><td>text not allowed</td></tr></table><br />
+<strong>Malformed:</strong> <![cdata check ]]>, < ![CDATA check ]]>, < ![CDATA check ] ]><br />
+Invalid:</strong> <em <!-- check -->>comment in tag content</em>, <!--check-->
 
 <h6>Ins-Del</h6>
 
@@ -320,7 +323,7 @@ na Alemanha.
 <strong>Relative and absolute:</strong> <a href="mailto:x"></a>, <a href="http://a.com/b/c/d.f"></a>, <a href="./../d.f"></a>, <a href="./d.f"></a>, <a href="d.f"></a>, <a href="#s"></a>, <a href="./../../d.f#s"></a><br />
 (try base URL value of 'http://a.com/b/')<br />
 <strong>CSS URLs:</strong> <div style="background-image: url('a.gif');"></div>, <div style="background-image: URL(&quot;a.gif&quot;);"></div>, <div style="background-image: url('http://a.com/a.gif');"></div>, <div style="background-image: url('./../a.gif');"></div>, <div style="background-image: &#117;r&#x6C;('js&#58;xss'&#x29;"></div><br />
-<strong>Anti-spam:</strong> (try regex for 'http://a.com', etc.) <a href="mailto:x@y.com"></a>, <a href="http://a.com/b@d.f"></a>, <a href="a.com/d.f" rel="nofollow"></a>, <a href="a.com/d.f" rel="1, 2"></a>, <a href="a.com/d.f"></a>, <a href="b.com/d.f"></a>, <a href="c.com/d.f"></a><br />
+<strong>Anti-spam:</strong> (try regex for 'http://a.com', etc.) <a href="mailto:x@y.com"></a>, <a href="http://a.com/b@d.f"></a>, <a href="a.com/d.f" rel="nofollow"></a>, <a href="a.com/d.f" rel="1, 2"></a>, <a href="a.com/d.f"></a>, <a href="b.com/d.f"></a>, <a href="c.com/d.f">, <a href="denied:http://c.com/d.f"></a><br />
 
 <h6>XSS</h6>
 
