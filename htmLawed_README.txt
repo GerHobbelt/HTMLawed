@@ -1,8 +1,8 @@
 /*
-htmLawed_README.txt, 22 December 2009
-htmLawed 1.1.9, 22 December 2009
+htmLawed_README.txt, 26 February 2010
+htmLawed 1.1.9.1, 26 February 2010
 Copyright Santosh Patnaik
-GPL v3 license
+LGPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
 */
 
@@ -171,7 +171,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 1.4  License & copyright ----------------------------------------o
 
 
-  htmLawed is free and open-source software licensed under GPL license version 3:- http://www.gnu.org/licenses/gpl-3.0.txt, and copyrighted by Santosh Patnaik, MD, PhD.
+  htmLawed is free and open-source software licensed under LGPL license version 3:- http://www.gnu.org/licenses/lgpl-3.0.txt, and copyrighted by Santosh Patnaik, MD, PhD.
 
 
 -- 1.5  Terms used here --------------------------------------------o
@@ -1288,6 +1288,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   `Version number - Release date. Notes`
   
+  1.1.9.1 - 26 February 2010. htmLawed now uses the LGPL version 3 license; support for 'flashvars' attribute for 'embed'
+  
   1.1.9 - 22 December 2009. Soft-hyphens are now removed only from URL-accepting attribute values
 
   1.1.8.1 - 16 July 2009. Minor code-change to fix a PHP error notice
@@ -1446,6 +1448,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   disabled - button, input, optgroup, option, select, textarea
   enctype - form
   face - font
+  flashvars* - embed
   for - label
   frame - table
   frameborder - iframe
