@@ -110,8 +110,8 @@ span.totop a, span.totop a:visited {color: #6699cc;}
 
 <div id="body">
 <br />
-<div class="comment">htmLawed_README.txt, 11 March 2009<br />
-htmLawed 1.1.7, 11 March 2009<br />
+<div class="comment">htmLawed_README.txt, 23 April 2009<br />
+htmLawed 1.1.8, 23 April 2009<br />
 Copyright Santosh Patnaik<br />
 GPL v3 license<br />
 A PHP Labware internal utility &#45; <a href="http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed">http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed</a>&#160;</div>
@@ -716,9 +716,9 @@ A PHP Labware internal utility &#45; <a href="http://www.bioinformatics.org/phpl
 <br />
 &#160; * &#160;htmLawed does not check the number of nested elements. E.g., it will allow two <span class="term">caption</span>&#160;elements in a <span class="term">table</span>&#160;element, illegal as per the specs. Admins may be able to use a custom hook function to enforce such checks (<span class="term">hook_tag</span>&#160;parameter; see <a href="#s3.4.9">section 3.4.9</a>).<br />
 <br />
-&#160; * &#160;htmLawed might convert certain entities to actual characters and remove CSS comment-markers (<span class="term">/&#42;</span>) in <span class="term">style</span>&#160;attribute values in order to detect malicious HTML like crafted IE-specific dynamic expressions like <span class="term">&amp;#101;xpression...</span>. If this is too harsh, admins can allow CSS expressions through htmLawed core but then use a custom function through the <span class="term">hook_tag</span>&#160;parameter (<a href="#s3.4.9">section 3.4.9</a>) to more specifically identify CSS expressions in the <span class="term">style</span>&#160;attribute values. Also, using <span class="term">$config["style_pass"]</span>, it is possible to have htmLawed pass <span class="term">style</span>&#160;attribute values without even looking at them (<a href="#s3.4.8">section 3.4.8</a>).<br />
+&#160; * &#160;htmLawed might convert certain entities to actual characters and remove backslashes and CSS comment-markers (<span class="term">/&#42;</span>) in <span class="term">style</span>&#160;attribute values in order to detect malicious HTML like crafted IE-specific dynamic expressions like <span class="term">&amp;#101;xpression...</span>. If this is too harsh, admins can allow CSS expressions through htmLawed core but then use a custom function through the <span class="term">hook_tag</span>&#160;parameter (<a href="#s3.4.9">section 3.4.9</a>) to more specifically identify CSS expressions in the <span class="term">style</span>&#160;attribute values. Also, using <span class="term">$config["style_pass"]</span>, it is possible to have htmLawed pass <span class="term">style</span>&#160;attribute values without even looking at them (<a href="#s3.4.8">section 3.4.8</a>).<br />
 <br />
-&#160; * &#160;htmLawed does not correct certain possible attribute-based security vulnerabilities (e.g., <span class="term">&lt;a href="http&#58;//x%22+style=%22background-image&#58;xss"&gt;x&lt;/a&gt;</span>). Theses arise when browsers mis-identify markup in <em>escaped</em>&#160;text, defeating the very purpose of escaping text (a bad browser will read the given example as <span class="term">&lt;a href="http&#58;//x" style="background-image&#58;xss"&gt;x&lt;/a&gt;</span>).<br />
+&#160; * &#160;htmLawed does not correct certain possible attribute-based security vulnerabilities (e.g., <span class="term">&lt;a href="http&#58;//x%22+style=%22background-image&#58;xss"&gt;x&lt;/a&gt;</span>). These arise when browsers mis-identify markup in <em>escaped</em>&#160;text, defeating the very purpose of escaping text (a bad browser will read the given example as <span class="term">&lt;a href="http&#58;//x" style="background-image&#58;xss"&gt;x&lt;/a&gt;</span>).<br />
 <br />
 &#160; * &#160;Because of poor Unicode support in PHP, htmLawed does not remove the <em>high value</em>&#160;HTML-invalid characters with multi-byte code-points. Such characters however are extremely unlikely to be in the input. (see <a href="#s3.1">section 3.1</a>).<br />
 <br />
@@ -861,7 +861,7 @@ A PHP Labware internal utility &#45; <a href="http://www.bioinformatics.org/phpl
 <br />
 &#160; Some mis-usages (and the resulting permitted elements) that can be avoided:<br />
 <br />
-&#160; * &#160;<span class="term">-&#42;</span>&#160;-- none; one should rather use, e.g., the <span class="term">htmlspecialchars()</span>&#160;PHP function on the input than htmLawed<br />
+&#160; * &#160;<span class="term">-&#42;</span>&#160;-- none; instead of htmLawed, one might just use, e.g., the <span class="term">htmlspecialchars()</span>&#160;PHP function<br />
 &#160; * &#160;<span class="term">&#42;, -script</span>&#160;-- all except <span class="term">script</span>; admin probably meant <span class="term">&#42;-script</span><br />
 &#160; * &#160;<span class="term">-&#42;, a, em, strong</span>&#160;-- all; admin probably meant <span class="term">a, em, strong</span><br />
 &#160; * &#160;<span class="term">&#42;</span>&#160;-- all; admin need not have set <span class="term">elements</span><br />
@@ -1111,7 +1111,9 @@ A PHP Labware internal utility &#45; <a href="http://www.bioinformatics.org/phpl
 <br />
 &#160; Note that attributes specified in <span class="term">$config["deny_attribute"]</span>&#160;are denied globally, for all elements. To deny attributes for only specific elements, <span class="term">$spec</span>&#160;(see <a href="#s2.3">section 2.3</a>) can be used. <span class="term">$spec</span>&#160;can also be used to element-specifically permit an attribute otherwise denied through <span class="term">$config["deny_attribute"]</span>.<br />
 <br />
-&#160; With <span class="term">$config["safe"] = 1</span>, the <span class="term">on&#42;</span>&#160;attributes are automatically disallowed.<br />
+&#160; With <span class="term">$config["safe"] = 1</span>&#160;(<a href="#s3.6">section 3.6</a>), the <span class="term">on&#42;</span>&#160;attributes are automatically disallowed.<br />
+<br />
+&#160; <strong>Note</strong>: To deny all but a few attributes globally, a simpler way to specify <span class="term">$config["deny_attribute"]</span>&#160;would be to use the notation <span class="term">&#42; -attribute1 -attribute2 ...</span>. Thus, a value of <span class="term">&#42; -title -href</span>&#160;implies that except <span class="term">href</span>&#160;and <span class="term">title</span>&#160;(where allowed as per standards) all other attributes are to be removed. With this notation, the value for the parameter <span class="term">safe</span>&#160;(<a href="#s3.6">section 3.6</a>) will have no effect on <span class="term">deny_attribute</span>.<br />
 <br />
 &#160; htmLawed (function <span class="term">hl_tag()</span>) also:<br />
 <br />
@@ -1180,9 +1182,9 @@ A PHP Labware internal utility &#45; <a href="http://www.bioinformatics.org/phpl
 <br />
 &#160; These default sets are used when <span class="term">$config["schemes"]</span>&#160;is not set (see <a href="#s2.2">section 2.2</a>). To over-ride the defaults, <span class="term">$config["schemes"]</span>&#160;is defined as a string of semi-colon-separated sub-strings of type <span class="term">attribute&#58; comma-separated schemes</span>. E.g., <span class="term">href&#58; mailto, http, https; onclick&#58; javascript; src&#58; http, https</span>. For unspecified attributes, <span class="term">file</span>, <span class="term">http</span>&#160;and <span class="term">https</span>&#160;are permitted. This can be changed by passing schemes for <span class="term">&#42;</span>&#160;in <span class="term">$config["schemes"]</span>. E.g., <span class="term">href&#58; mailto, http, https; &#42;&#58; https, https</span>.<br />
 <br />
-&#160; Thus, <em>to allow Javascript</em>, one can set <span class="term">$config["schemes"]</span>&#160;as <span class="term">href&#58; mailto, http, https; &#42;&#58; https, https, javascript</span>.<br />
-<br />
 &#160; <span class="term">&#42;</span>&#160;can be put in the list of schemes to permit all protocols. E.g., <span class="term">style&#58; &#42;; img&#58; http, https</span>&#160;results in protocols not being checked in <span class="term">style</span>&#160;attribute values. However, in such cases, any relative-to-absolute URL conversion, or vice versa, (<a href="#s3.4.4">section 3.4.4</a>) is not done.<br />
+<br />
+&#160; Thus, <em>to allow Javascript</em>, one can set <span class="term">$config["schemes"]</span>&#160;as <span class="term">href&#58; mailto, http, https; &#42;&#58; http, https, javascript</span>, or <span class="term">href&#58; mailto, http, https, javascript; &#42;&#58; http, https, javascript</span>, or <span class="term">&#42;&#58; &#42;</span>, and so on.<br />
 <br />
 &#160; As a side-note, one may find <span class="term">style&#58; &#42;</span>&#160;useful as URLs in <span class="term">style</span>&#160;attributes can be specified in a variety of ways, and the patterns that htmLawed uses to identify URLs may mistakenly identify non-URL text.<br />
 <br />
@@ -1603,7 +1605,9 @@ A PHP Labware internal utility &#45; <a href="http://www.bioinformatics.org/phpl
 <br />
 &#160; <em>Version number - Release date. Notes</em><br />
 <br />
-&#160; 1.1.7 - 11 March 2009. Attributes globally denied through <span class="term">deny_attribute</span>&#160;can be allowed element-specifically through <span class="term">$spec</span>; <span class="term">$config["style_pass"]</span>&#160;allowing letting through any <span class="term">style</span>&#160;value introduced; altered logic to catch certain types of dynamic crafted CSS expressions<br />
+&#160; 1.1.8 - 23 April 2009. Parameter <span class="term">deny_attribute</span>&#160;now accepts the wild-card <span class="term">&#42;</span>, making it simpler to specify its value when all but a few attributes are being denied; fixed a bug in interpreting <span class="term">$spec</span><br />
+<br />
+&#160; 1.1.7 - 11-12 March 2009. Attributes globally denied through <span class="term">deny_attribute</span>&#160;can be allowed element-specifically through <span class="term">$spec</span>; <span class="term">$config["style_pass"]</span>&#160;allowing letting through any <span class="term">style</span>&#160;value introduced; altered logic to catch certain types of dynamic crafted CSS expressions<br />
 <br />
 &#160; 1.1.3-6 - 28-31 January - 4 February 2009. Altered logic to catch certain types of dynamic crafted CSS expressions<br />
 <br />
@@ -1966,7 +1970,7 @@ A PHP Labware internal utility &#45; <a href="http://www.bioinformatics.org/phpl
 </div>
 </div>
 <br />
-<hr /><br /><br /><span class="subtle"><small>HTM version of <em><a href="htmLawed_README.txt">htmLawed_README.txt</a></em> generated on 11 Mar, 2009 using <a href="http://www.bioinformatics.org/phplabware/internal_utilities">rTxt2htm</a> from PHP Labware</small></span>
+<hr /><br /><br /><span class="subtle"><small>HTM version of <em><a href="htmLawed_README.txt">htmLawed_README.txt</a></em> generated on 23 Apr, 2009 using <a href="http://www.bioinformatics.org/phplabware/internal_utilities">rTxt2htm</a> from PHP Labware</small></span>
 </div><!-- ended div body -->
 </div><!-- ended div top -->
 </body>

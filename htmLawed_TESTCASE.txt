@@ -1,6 +1,6 @@
 /*
-htmLawed_TESTCASE.txt, 11 March 2009
-htmLawed 1.1.7, 11 March 2009
+htmLawed_TESTCASE.txt, 23 April 2009
+htmLawed 1.1.8, 23 April 2009
 Copyright Santosh Patnaik
 GPL v3 license
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -334,11 +334,11 @@ src=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#1
 <div style="background-image:url(&quot;javascript:alert('xss')&quot; );"></div><br />
 <!--[if gte IE 4]><script>alert('xss');</script><![endif]--><br />
 <script a=">" src="http://ha.ckers.org/xss.js"></script><br />
-<a href="http://x&x=%22+style%3d%22background-image%3a+expression%28alert
-%28%27xss%3f%29%29">x</a><br />
 <div style="background-image: &#117;r&#x6C;('js&#58;xss'&#x29;"></div><br />
-<img style=color:expr/*comment*/ession(alert(document.domain))><br />
 <a style=";-moz-binding:url(http://lukasz.pilorz.net/xss/xss.xml#xss)" href="http://example.com">test</a><br />
+<strong>Bad IE7:</strong> <a href="http://x&x=%22+style%3d%22background-image%3a+expression%28alert
+%28%27xss%3f%29%29">x</a><br />
+<strong>Bad IE7:</strong> <a style=color:expr/*comment*/ession(alert(document.domain))>xxx</a><br />
 <strong>Bad IE7:</strong> <a href="xxx" style="background: exp&#x72;ession(alert('xss'));">xxx</a><br />
 <strong>Bad IE7:</strong> <a href="xxx" style="background: &#101;xpression(alert('xss'));">xxx</a><br />
 <strong>Bad IE7:</strong> <a href="xxx" style="background: %45xpression(alert('xss'));">xxx</a><br />
@@ -356,6 +356,12 @@ src=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#1
 <strong>Bad IE7:</strong> <a href="x" style="background: huh /* */ */expression(alert('xss'));">x</a><br />
 <strong>Bad IE7:</strong> <a href="x" style="background:/**/expression(alert('xss'));background:/**/expression(alert('xss'));">x</a><br />
 <strong>Bad IE7:</strong> exp/*<a style='no\xss:noxss("*//*");xss:&#101;x&#x2F;*XSS*//*/*/pression(alert("XSS"))'>x</a><br />
+<strong>Bad IE7:</strong> <a style="background:&#69;xpre\ssion(alert('xss'));">hi</a><br />
+<strong>Bad IE7:</strong> <a style="background:expre&#x5c;ssion(alert('xss'));">hi</a><br />
+<strong>Bad IE7:</strong> <a style="color: \0065 \0078 \0070 \0072 \0065 \0073 \0073 \0069 \006f \006e \0028 \0061 \006c \0065 \0072 \0074 \0028 \0031 \0029 \0029">test</a><br />
+<strong>Bad IE7:</strong> <a style="xss:e&#92;&#48;&#48;&#55;&#56;pression(window.x?0:(alert(/XSS/),window.x=1));">hi</a><br />
+<strong>Bad IE7:</strong> <a style="background:url('java
+script:eval(document.all.mycode.expr)')">hi</a><br />
 
 <h6>Other</h6>
 
