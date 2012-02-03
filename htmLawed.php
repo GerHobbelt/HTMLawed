@@ -44,7 +44,7 @@ if(isset($x['on*'])){
 }
 $C['deny_attribute'] = $x;
 // config URL
-$x = (isset($C['schemes'][2]) && strpos($C['schemes'], ':')) ? strtolower($C['schemes']) : 'href: aim, feed, file, ftp, gopher, http, https, irc, mailto, news, nntp, sftp, ssh, telnet; *:file, http, https';
+$x = (isset($C['schemes'][2]) && strpos($C['schemes'], ':')) ? strtolower($C['schemes']) : 'href: aim, feed, file, ftp, gopher, http, https, irc, mailto, news, nntp, sftp, ssh, telnet, git; *:file, http, https';
 $C['schemes'] = array();
 foreach(explode(';', str_replace(array(' ', "\t", "\r", "\n"), '', $x)) as $v){
  $x = $x2 = null; list($x, $x2) = explode(':', $v, 2);
