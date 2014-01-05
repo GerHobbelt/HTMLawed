@@ -1,7 +1,7 @@
 <?php
 
 /*
-htmLawed 1.1.10, 5 April 2012
+htmLawed 1.1.11, 5 June 2012
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2 or later
 A PHP Labware internal utility; www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -427,7 +427,7 @@ if($C['make_tag_strict'] && isset($eD[$e])){
 // close tag
 static $eE = array('area'=>1, 'br'=>1, 'col'=>1, 'embed'=>1, 'hr'=>1, 'img'=>1, 'input'=>1, 'isindex'=>1, 'param'=>1); // Empty ele
 if(!empty($m[1])){
- return (!isset($eE[$e]) ? "</$e>" : (($C['keep_bad'])%2 ? str_replace(array('<', '>'), array('&lt;', '&gt;'), $t) : ''));
+ return (!isset($eE[$e]) ? (empty($C['hook_tag']) ? "</$e>" : $C['hook_tag']($e)) : (($C['keep_bad'])%2 ? str_replace(array('<', '>'), array('&lt;', '&gt;'), $t) : ''));
 }
 
 // open tag & attr
@@ -470,8 +470,8 @@ while(strlen($a)){
     $aA[$nm] = '';
    }
   break; case 2: // Val
-   if(preg_match('`^"[^"]*"`', $a, $m) or preg_match("`^'[^']*'`", $a, $m) or preg_match("`^\s*[^\s\"']+`", $a, $m)){
-    $m = $m[0]; $w = 1; $mode = 0; $a = ltrim(substr_replace($a, '', 0, strlen($m)));
+   if(preg_match('`^((?:"[^"]*")|(?:\'[^\']*\')|(?:\s*[^\s"\']+))(.*)`', $a, $m)){
+    $a = ltrim($m[2]); $m = $m[1]; $w = 1; $mode = 0;
     $aA[$nm] = trim(($m[0] == '"' or $m[0] == '\'') ? substr($m, 1, -1) : $m);
    }
   break;
@@ -686,7 +686,7 @@ return str_replace(array("\x01", "\x02", "\x03", "\x04", "\x05", "\x07"), array(
 
 function hl_version(){
 // rel
-return '1.1.10';
+return '1.1.11';
 // eof
 }
 
