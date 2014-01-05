@@ -1,8 +1,8 @@
 /*
-htmLawed_README.txt, 8 June 2012
-htmLawed 1.1.11, 5 June 2012
+htmLawed_README.txt, 5 July 2012
+htmLawed 1.1.12, 5 July 2012
 Copyright Santosh Patnaik
-Dual licensed with LGPL 3 and GPL 2 or later
+Dual licensed with LGPL 3 and GPL 2+
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
 */
 
@@ -171,7 +171,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 1.4  License & copyright ----------------------------------------o
 
 
-  htmLawed is free and open-source software dual licensed under LGPL license version 3:- http://www.gnu.org/licenses/lgpl-3.0.txt and GPL license version 2:- http://www.gnu.org/licenses/gpl-2.0.txt or later, and copyrighted by Santosh Patnaik, MD, PhD.
+  htmLawed is free and open-source software dual licensed under LGPL license version 3:- http://www.gnu.org/licenses/lgpl-3.0.txt, and GPL license version 2:- http://www.gnu.org/licenses/gpl-2.0.txt (or later), and copyrighted by Santosh Patnaik, MD, PhD.
 
 
 -- 1.5  Terms used here --------------------------------------------o
@@ -204,7 +204,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   To easily *test* htmLawed using a form-based interface, use the provided demo:- htmLawedTest.php ('htmLawed.php' and 'htmLawedTest.php' should be in the same directory on the web-server).
   
-  *Note*: For code for usage of the htmLawed class (for htmLawed in OOP), please refer to the htmLawed:- http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed website; the filtering itself can be configured, etc., as described here.
+  *Note*: For code for usage of the htmLawed class (for htmLawed in OOP), please refer to this page:- http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/oop.htm on the htmLawed website; the filtering itself can be configured, etc., as described here.
 
 
 -- 2.1  Simple ------------------------------------------------------
@@ -1321,6 +1321,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   `Version number - Release date. Notes`
   
+  1.1.12 - 5 July 2012. Fix for a bug in identifying an unquoted value of the 'face' attribute 
+  
   1.1.11 - 5 June 2012. Fix for possible problem with handling of multi-byte characters in attribute values in an mbstring.func_overload enviroment. '$config["hook_tag"]', if specified, now receives names of elements in closing tags.
   
   1.1.10 - 22 October 2011. Fix for a bug in the 'tidy' functionality that caused the entire input to be replaced with a single space; new parameter, '$config["direct_list_nest"]' to allow direct descendance of a list in a list. (5 April 2012. Dual licensing from LGPLv3 to LGPLv3 and GPLv2+.)
@@ -1385,7 +1387,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   *Important*  The following upgrades may affect the functionality of a specific htmLawed as indicated by their corresponding notes:
 
-  (1) From version 1.1-1.1.10 to 1.1.11, if a 'hook_tag' function is in use: In version 1.1.11, elements in closing tags (and not just the opening tags) are also passed to the function. There are no attribute names/values to pass, so a 'hook_tag' function receives only the element name. The 'hook_tag' function therefore may have to be edited. See section:- #3.4.9.
+  (1) From version 1.1-1.1.10 to 1.1.11 (or later), if a 'hook_tag' function is in use: In version 1.1.11, elements in closing tags (and not just the opening tags) are also passed to the function. There are no attribute names/values to pass, so a 'hook_tag' function receives only the element name. The 'hook_tag' function therefore may have to be edited. See section:- #3.4.9.
 
   Old versions of htmLawed may be available online. E.g., for version 1.0, check http://www.bioinformatics.org/phplabware/downloads/htmLawed1.zip, for 1.1.1, htmLawed111.zip, and for 1.1.10, htmLawed1110.zip.
 
