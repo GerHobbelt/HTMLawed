@@ -1,4 +1,12 @@
-htmLawed change-log
+htmLawed 1.2 beta change-log
+
+**** 1.2.beta.4, 11 September 2013 release ****
+
+Incorporated the changes made from htmLawed 1.1.14 to 1.1.16: improved Tidy functionality and detection of specially crafted URL protocols
+
+**** 1.2.beta.3, 6 August 2013 release ****
+
+Improved checking for valid nesting within the a element
 
 **** 1.2.beta.2, 9 June 2013 release ****
 
