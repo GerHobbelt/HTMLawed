@@ -2,9 +2,9 @@
 
 /*
 htmLawedTest.php, 22 October 2011
-htmLawed 1.1.10, 22 October 2011
+htmLawed 1.1.10, 5 April 2012
 Copyright Santosh Patnaik
-LGPL v3 license
+Dual licensed with LGPL 3 and GPL 2 or later
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
 
 Test htmLawed; user provides text input; input and processed input are shown as highlighted code and rendered HTML; also shown are execution time and peak memory usage

@@ -1,9 +1,9 @@
 <?php
 
 /*
-htmLawed 1.1.10, 22 October 2011
+htmLawed 1.1.10, 5 April 2012
 Copyright Santosh Patnaik
-LGPL v3 license
+Dual licensed with LGPL 3 and GPL 2 or later
 A PHP Labware internal utility; www.bioinformatics.org/phplabware/internal_utilities/htmLawed
 
 See htmLawed_README.txt/htm

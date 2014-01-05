@@ -1,8 +1,8 @@
 /*
-htmLawed_README.txt, 23 October 2011
-htmLawed 1.1.10, 22 October 2011
+htmLawed_README.txt, 5 April 2012
+htmLawed 1.1.10, 5 April 2012
 Copyright Santosh Patnaik
-LGPL v3 license
+Dual licensed with LGPL 3 and GPL 2 or later
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
 */
 
@@ -171,7 +171,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 1.4  License & copyright ----------------------------------------o
 
 
-  htmLawed is free and open-source software licensed under LGPL license version 3:- http://www.gnu.org/licenses/lgpl-3.0.txt, and copyrighted by Santosh Patnaik, MD, PhD.
+  htmLawed is free and open-source software dual licensed under LGPL license version 3:- http://www.gnu.org/licenses/lgpl-3.0.txt and GPL license version 2:- http://www.gnu.org/licenses/gpl-2.0.txt or later, and copyrighted by Santosh Patnaik, MD, PhD.
 
 
 -- 1.5  Terms used here --------------------------------------------o
@@ -1313,7 +1313,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   `Version number - Release date. Notes`
   
-  1.1.10 - 22 October 2011. Fix for a bug in the 'tidy' functionality that caused the entire input to be replaced with a single space; new parameter, '$config["direct_list_nest"]' to allow direct descendance of a list in a list
+  1.1.10 - 22 October 2011. Fix for a bug in the 'tidy' functionality that caused the entire input to be replaced with a single space; new parameter, '$config["direct_list_nest"]' to allow direct descendance of a list in a list. (5 April 2012. Dual licensing from LGPLv3 to LGPLv3 and GPLv2+.)
   
   1.1.9.5 - 6 July 2011. Minor correction of a rule for nesting of 'li' within 'dir'
   
