@@ -10,7 +10,7 @@ It ensures that HTML tags are balanced and properly nested tags, neutralizes cod
 for cross-site scripting (XSS) attacks, limits allowed HTML elements, attributes, or URL protocols, 
 tidies the code, and so forth.
 
-As such is may serve as an alternative to [HTMLtidy](http://en.wikipedia.org/wiki/HTML_Tidy) in a 
+As such it may serve as an alternative to [HTMLtidy](http://en.wikipedia.org/wiki/HTML_Tidy) in a 
 sanitation context.
 
 
