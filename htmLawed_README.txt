@@ -1,6 +1,6 @@
 /*
-htmLawed_README.txt, 2 June 2013
-htmLawed 1.12.beta.1, 2 June 2013
+htmLawed_README.txt, 9 June 2013
+htmLawed 1.12.beta.2, 9 June 2013
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2+
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/beta
@@ -74,9 +74,9 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 == 1  About htmLawed ================================================
 
 
-  htmLawed is a PHP script to process text with HTML markup to make it more comliant with HTML standards (HTML4 or HTML5) and administrative policies. It works by making HTML well-formed with balanced and properly nested tags, neutralizing code that may be used for cross-site scripting (XSS) attacks, allowing only specified HTML tags and attributes, and so on. Such `lawing in` of HTML in text used in (X)HTML or XML documents ensures that it is in accordance with the aesthetics, safety and usability requirements set by administrators.
+  htmLawed is a PHP script to process text with HTML markup to make it more comliant with HTML standards and administrative policies. It works by making HTML well-formed with balanced and properly nested tags, neutralizing code that may be used for cross-site scripting (XSS) attacks, allowing only specified HTML tags and attributes, and so on. Such `lawing in` of HTML in text used in (X)HTML or XML documents ensures that it is in accordance with the aesthetics, safety and usability requirements set by administrators.
   
-  htmLawed is highly customizable, and fast with low memory usage. Its free and open-source code is in one small file, does not require extensions or libraries, and works in older versions of PHP as well. It is a good alternative to the HTML Tidy:- http://tidy.sourceforge.net application.
+  htmLawed is highly customizable, and fast with low memory usage. Its free and open-source code is in one small file. It does not require extensions or libraries, and works in older versions of PHP as well. It is a good alternative to the HTML Tidy:- http://tidy.sourceforge.net application.
 
 
 -- 1.1  Example uses ------------------------------------------------
@@ -90,7 +90,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   *  Text processing for stricter XML standard-compliance: e.g., to have lowercased 'x' in hexadecimal numeric entities becomes necessary if an XHTML document with MathML content needs to be served as 'application/xml'
 
-  *  Scraping text or data from web-pages
+  *  Scraping text from web-pages
   
   *  Transforming an HTML element to another
 
@@ -102,13 +102,13 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   
   htmLawed:
   
-  *  makes input more *secure* and *standard-compliant* for HTML 4/5, XHTML 1/1.1, and generic *XML* documents  ^~
-  *  supports markup for *microdata, Aria, Ruby*, etc.
-  *  can *beautify* or *compact* HTML  ^~
+  *  makes input more *secure* and *standard-compliant* for HTML4/5, XHTML, and generic *XML* documents  ^
+  *  supports markup for *microdata, Aria, Ruby, custom attributes*, etc.  ^
+  *  can *beautify* or *compact* HTML  ~
   *  is *independent of character encoding* of input and does not affect it
   *  has good *tolerance for ill-written HTML*
 
-  *  can *restrict elements*  ^~
+  *  can enforce *restricted use of elements*  *~
   *  ensures proper closure of empty elements like 'img'  ^
   *  *transforms deprecated elements* like 'font'  ^~
   *  can permit HTML *comments* and 'CDATA' sections  ^~
@@ -120,13 +120,14 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   *  provides *required attributes*, like 'alt' for 'image'  ^
   *  *transforms deprecated attributes*  ^~
   *  ensures attributes are *declared only once*  ^
+  *  permits use of *data- attributes*  ^~
+  *  permits *custom*, non-standard attributes as well as custom rules for standard attributes  ~
 
   *  declares value for `empty` (`minimized` or `boolean`) attributes like 'checked'  ^
   *  checks for potentially dangerous attribute values  *~
   *  ensures *unique* 'id' attribute values  ^~
   *  *double-quotes* attribute values  ^
   *  lower-cases *standard attribute values* like 'password'  ^
-  *  permits *custom*, non-standard attributes as well as custom rules for standard attributes  ~
 
   *  can restrict *URL protocol/scheme by attribute*  *~
   *  can disable *dynamic expressions* in 'style' values  *~
@@ -202,13 +203,15 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 1.6  Availability ------------------------------------------------o
 
 
-  htmLawed can be downloaded for free at its website:- http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed. Besides the 'htmLawed.php' file, the download has the htmLawed documentation (this document) in plain text:- htmLawed_README.txt and HTML:- htmLawed_README.htm formats, a script for testing:- htmLawedTest.php, and a text file for test-cases:- htmLawed_TESTCASE.txt. htmLawed is also available as a PHP class (OOP code) on its website.
+  htmLawed can be downloaded for free at its website:- http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed. Besides the 'htmLawed.php' file, the download has the htmLawed documentation (this document) in plain text:- htmLawed_README.txt and HTML:- htmLawed_README.htm formats, a script for testing:- htmLawedTest.php, and a text file for test-cases:- htmLawed_TESTCASE.txt. htmLawed is also available as a PHP class (OOP code), and as a version without HTML5 support on its website.
 
 
 == 2  Usage ========================================================oo
 
 
-  htmLawed works in PHP version 4.4 or higher. Either 'include()' the 'htmLawed.php' file, or copy-paste the entire code. To use with PHP 4.3, have the following code included:
+  htmLawed works in PHP version 4.4 or higher. Either 'include()' the 'htmLawed.php' file, or copy-paste the entire code.
+  
+  To use with PHP 4.3, have the following code included:
 
     if(!function_exists('ctype_digit')){
      function ctype_digit($var){
@@ -377,7 +380,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   '1' - allow  *
 
   *no_deprecated_attr*
-  Allow deprecated attributes (as per HTML 4) or transform them; see section:- #3.4.6
+  Allow deprecated attributes (as per HTML4) or transform them; see section:- #3.4.6
 
   '0' - allow  
   '1' - transform, but 'name' attributes for 'a' and 'map' are retained  *
@@ -515,7 +518,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   When setting the parameters/arguments (like those to allow certain HTML elements) for use with htmLawed, one should bear in mind that the setting may let through potentially `dangerous` HTML code which is meant to steal user-data, deface a website, render a page non-functional, etc. Unless end-users, either people or software, supplying the content are completely trusted, security issues arising from the degree of HTML usage permitted through htmLawed's setting should be considered. For example, following increase security risks:
 
-  *  Allowing 'script', 'applet', 'embed', 'iframe' or 'object' elements, or certain of their attributes like 'allowscriptaccess'
+  *  Allowing 'script', 'applet', 'embed', 'iframe', 'canvas', 'audio', 'video' or 'object' elements, or certain of their attributes like 'allowscriptaccess'
 
   *  Allowing HTML comments (some Internet Explorer versions are vulnerable with, e.g., '<!--[if gte IE 4]><script>alert("xss");</script><![endif]-->'
   
@@ -533,7 +536,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 2.6  Use with 'kses()' code --------------------o
 
 
-  The 'Kses' PHP script for HTML filtering is used by many applications (like 'WordPress'). It is possible to have such applications use htmLawed instead, since it is compatible with code that calls the 'kses()' function declared in the 'Kses' file (usually named 'kses.php'). E.g., application code like this will continue to work after replacing 'Kses' with htmLawed:
+  The 'Kses' PHP script for HTML filtering is used by many applications (like 'WordPress', as in year 2012). It is possible to have such applications use htmLawed instead, since it is compatible with code that calls the 'kses()' function declared in the 'Kses' file (usually named 'kses.php'). E.g., application code like this will continue to work after replacing 'Kses' with htmLawed:
 
     $comment_filtered = kses($comment_input, array('a'=>array(), 'b'=>array(), 'i'=>array()));
 
@@ -611,29 +614,27 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   *  For URLs, unless '$config["scheme"]' is appropriately set, writers should avoid using escape characters or entities in schemes. E.g., 'htt&#112;' (which many browsers will read as the harmless 'http') may be considered bad by htmLawed.
 
-  *  htmLawed will attempt to put plain text present directly inside 'blockquote', 'form', 'map' and 'noscript' elements (illegal as per the specifications) inside auto-generated 'div' elements.
+  *  htmLawed will attempt to put plain text present directly inside 'blockquote', 'form', 'map' and 'noscript' elements (illegal as per the specifications) inside auto-generated 'div' elements during tag balancing (section:- #3.3.3).
 
 
 -- 2.8  Limitations & work-arounds ---------------------------------o
 
 
-  htmLawed's main objective is to make the input text `more` standard-compliant, secure for readers, and free of HTML elements and attributes considered undesirable by the administrator. Some of its current limitations, regardless of this objective, are noted below along with work-arounds.
+  htmLawed's main objective is to make the input text `more` standard-compliant, secure for readers, and free of HTML elements and attributes considered undesirable by the administrator. Some of its current limitations, regardless of this objective, are noted below along with possible work-arounds.
 
-  It should be borne in mind that no browser application is 100% standard-compliant, and that some of the standard specifications (like asking for normalization of white-spacing within 'textarea' elements) are clearly wrong. Regarding security, note that `unsafe` HTML code is not legally invalid per se.
+  It should be borne in mind that no browser application is 100% standard-compliant, standard specifications continue to evolve, and many browsers accept commonly used non-standard HTML. Regarding security, note that `unsafe` HTML code is not legally invalid per se.
   
-  *  HTML is a continuously evolving standard whose specifications also vary from one group to another (W3C vs. WHATWG), and htmLawed may not be fully standard-compliant as per the specifications at a particular time or of a specific group.
+  *  HTML is a continuously evolving standard whose specifications also vary from one group to another (W3C vs. WHATWG), and htmLawed may not be fully standard-compliant as per the specifications at a particular time or of a specific group. E.g., as in mid-2013, the 'border' attribute is valid in 'table' as per W3C but not WHATWG.
+  
+  *  In general, htmLawed processes input to generate output that is most likely to be standards-compatible in most users' browsers. Thus, for example, it does not enforce the required value of '0' on 'border' attribute of 'img' (HTML5 specification).
 
-  *  htmLawed is meant for input that goes into the 'body' of HTML documents. HTML's head-level elements are not supported, nor are the frameset elements 'frameset', 'frame' and 'noframes'. Content of the latter elements can, however, be individually filtered through htmLawed.
-
-  *  It cannot transform the non-standard 'embed' elements to the standard-compliant 'object' elements. Yet, it can allow 'embed' elements if permitted ('embed' is widely used and supported). Admins can certainly use the 'hook_tag' parameter (section:- #3.4.9) to deploy a custom embed-to-object converter function.
-
-  *  The only non-standard element that may be permitted is 'embed'; others like 'noembed' and 'nobr' cannot be permitted without modifying the htmLawed code.
+  *  htmLawed is meant for input that goes into the 'body' of HTML documents. HTML's head-level elements are not supported, nor are the frame-specific elements 'frameset', 'frame' and 'noframes'. However, content of the latter elements can be individually filtered through htmLawed.
 
   *  It cannot handle input that has non-HTML code like 'SVG' and 'MathML'. One way around is to break the input into pieces and passing only those without non-HTML code to htmLawed. Another is described in section:- #3.9. A third way may be to some how take advantage of the '$config["and_mark"]' parameter (see section:- #3.2).
 
-  *  By default, htmLawed won't check many attribute values for standard compliance. E.g., 'width="20m"' with the dimension in non-standard 'm' is let through. Implementing universal and strict attribute value checks can make htmLawed slow and resource-intensive. Admins should look at the 'hook_tag' parameter (section:- #3.4.9) or '$spec' to enforce finer checks.
+  *  By default, htmLawed won't check many attribute values for standard compliance. E.g., 'width="20m"' with the dimension in non-standard 'm' is let through. Implementing universal and strict attribute value checks can make htmLawed slow and resource-intensive. Admins should look at the 'hook_tag' parameter (section:- #3.4.9) or '$spec' to enforce finer checks on attribute values.
 
-  *  The attributes, deprecated (which can be transformed too) or not, that it supports are largely those that are in the specifications. Only a few of the proprietary attributes are supported.
+  *  The attributes, deprecated (which can be transformed too) or not, that it supports are largely those that are in the specifications. Only a few of the proprietary attributes are supported. However, '$spec' can be used to allow custom attributes (section:- #2.3).
 
   *  Except for contained URLs and dynamic expressions (also optional), htmLawed does not check CSS style property values. Admins should look at using the 'hook_tag' parameter (section:- #3.4.9) or '$spec' for finer checks. Perhaps the best option is to disallow 'style' but allow 'class' attributes with the right 'oneof' or 'match' values for 'class', and have the various class style properties in '.css' CSS stylesheet files.
 
@@ -650,6 +651,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   *  htmLawed does not check for certain element orderings described in the standard specifications (e.g., in a 'table', 'tbody' is allowed before 'tfoot'). Admins may be able to use a custom hook function to enforce such checks ('hook_tag' parameter; see section:- #3.4.9).
 
   *  htmLawed does not check the number of nested elements. E.g., it will allow two 'caption' elements in a 'table' element, illegal as per the specifications. Admins may be able to use a custom hook function to enforce such checks ('hook_tag' parameter; see section:- #3.4.9).
+  
+  *  There are multiple ways to interpret ill-written HTML. E.g., in '<small><small>text</small>', is it that the second closing tag for 'small' is missing or is it that the second opening tag for 'small' was put in by mistake? htmLawed corrects the HTML in the string assuming the former, while the user may have intended the string for the latter. This is an issue that is impossible to address perfectly.
 
   *  htmLawed might convert certain entities to actual characters and remove backslashes and CSS comment-markers ('/*') in 'style' attribute values in order to detect malicious HTML like crafted IE-specific dynamic expressions like '&#101;xpression...'. If this is too harsh, admins can allow CSS expressions through htmLawed core but then use a custom function through the 'hook_tag' parameter (section:- #3.4.9) to more specifically identify CSS expressions in the 'style' attribute values. Also, using '$config["style_pass"]', it is possible to have htmLawed pass 'style' attribute values without even looking at them (section:- #3.4.8).
 
@@ -812,11 +815,11 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   See section:- #3.3.3 for differences between the various non-zero '$config["keep_bad"]' values.
 
-  htmLawed by default permits these 117 elements of the HTML4/5 specifications:
+  htmLawed by default permits these 118 elements of the HTML4/5 specifications:
 
-    a, abbr, acronym, address, applet, area, article, aside, audio, b, bdi, bdo, big, blockquote, br, button, canvas, caption, center, cite, code, col, colgroup, command, data, datalist, dd, del, details, dfn, dir, div, dl, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, i, iframe, img, input, ins, isindex, kbd, keygen, label, legend, link, map, mark, menu, meta, meter, nav, noscript, object, ol, optgroup, option, output, p, param, pre, progress, q, rb, rbc, rp, rt, rtc, ruby, s, samp, script, section, select, small, source, span, strike, strong, style, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, track, tt, u, ul, var, video, wbr
+    a, abbr, acronym, address, applet, area, article, aside, audio, b, bdi, bdo, big, blockquote, br, button, canvas, caption, center, cite, code, col, colgroup, command, data, datalist, dd, del, details, dfn, dir, div, dl, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, i, iframe, img, input, ins, isindex, kbd, keygen, label, legend, link, main, map, mark, menu, meta, meter, nav, noscript, object, ol, optgroup, option, output, p, param, pre, progress, q, rb, rbc, rp, rt, rtc, ruby, s, samp, script, section, select, small, source, span, strike, strong, style, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, track, tt, u, ul, var, video, wbr
 
-  The HTML4 elements 'acronym', 'applet', 'big', 'center', 'dir', 'font', 'strike', and 'tt' are obsolete/deprecated in HTML5. On the other hand, the obsolete/deprecated HTML4 elements 'embed', 'menu' and 'u' are no longer so in HTML4. The new elements of HTML5 that are not in HTML4 or the Ruby specification are 'article', 'aside', 'audio', 'bdi', 'canvas', 'command', 'data', 'datalist', 'details', 'figure', 'figcaption', 'footer', 'header', 'hgroup', 'keygen', 'link', 'mark', 'meta', 'meter', 'nav', 'output', 'progress', 'section', 'source', 'style', 'summary', 'time', 'track', 'video', and 'wbr'. The 'link', 'meta' and 'style' elements exist in HTML4 but are not allowed in the HTML body. These 16 elements are `empty` elements that have an opening tag with possible content but no element content (thus, no closing tag): 'area', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'isindex', 'keygen', 'link', 'meta', 'param', 'source', 'track', and 'wbr'. Browsers have supported 'embed' because of its wide-spread use even though it is missing in HTML4 (it is a part of HTML5). The Ruby elements 'rb', 'rbc', and 'rtc' are not in HTML5 as of April 2012, but it is likely that they will be included in the future.
+  The HTML4 elements 'acronym', 'applet', 'big', 'center', 'dir', 'font', 'strike', and 'tt' are obsolete/deprecated in HTML5. On the other hand, the obsolete/deprecated HTML4 elements 'embed', 'menu' and 'u' are no longer so in HTML4. The new elements of HTML5 that are not in HTML4 or the Ruby specification are 'article', 'aside', 'audio', 'bdi', 'canvas', 'command', 'data', 'datalist', 'details', 'figure', 'figcaption', 'footer', 'header', 'hgroup', 'keygen', 'link', 'main', 'mark', 'meta', 'meter', 'nav', 'output', 'progress', 'section', 'source', 'style', 'summary', 'time', 'track', 'video', and 'wbr'. The 'link', 'meta' and 'style' elements exist in HTML4 but are not allowed in the HTML body. These 16 elements are `empty` elements that have an opening tag with possible content but no element content (thus, no closing tag): 'area', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'isindex', 'keygen', 'link', 'meta', 'param', 'source', 'track', and 'wbr'. Browsers have supported 'embed' because of its wide-spread use even though it is missing in HTML4 (it is a part of HTML5). The Ruby elements 'rb', 'rbc', and 'rtc' are not in HTML5 as of April 2012, but it is likely that they will be included in the future.
 
   With '$config["safe"] = 1', the default set will exclude 'applet', 'audio', 'canvas', 'embed', 'iframe', 'object', 'script' and 'video'; see section:- #3.6.
 
@@ -977,7 +980,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   htmLawed currently does not check for conformance to these rules. Note that any non-compliance in this regard will not introduce security vulnerabilities, crash browser applications, or affect the rendering of web-pages.
   
-  With '$config["direct_list_nest"]' set to '1', htmLawed will allow direct nesting of 'ol', 'ul', or 'menu' list within another 'ol', 'ul', or 'menu' without requiring the child list to be within an 'li' of the parent list. While this is not standard-compliant, directly nested lists are rendered properly by almost all browsers. The parameter '$config["direct_list_nest"]' has no effect if tag-balancing (section:- #3.3.3) is turned off.
+  With '$config["direct_list_nest"]' set to '1', htmLawed will allow direct nesting of 'ol', 'ul', or 'menu' list within another 'ol', 'ul', or 'menu' without requiring the child list to be within an 'li' of the parent list. While this may not be standard-compliant, directly nested lists are rendered properly by almost all browsers. The parameter '$config["direct_list_nest"]' has no effect if tag balancing (section:- #3.3.3) is turned off.
 
 
 -- 3.3.5  Beautify or compact HTML ---------------------------------o
@@ -1001,7 +1004,9 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 3.4  Attributes ------------------------------------------------oo
 
 
-  htmLawed will only permit attributes described in the HTML specifications (including deprecated ones). It also permits some attributes for use with the 'embed' element (the non-standard 'embed' element is supported in htmLawed because of its widespread use), and the the 'xml:space' attribute (valid only in XHTML 1.1). A list of such 111 attributes and the elements they are allowed in is in section:- #5.2. Using the '$spec' argument, htmLawed can be forced to permit custom, non-standard attributes as well as custom rules for standard attributes (section:- #2.3).
+  In its default setting, htmLawed will only permit attributes described in the HTML specifications (including deprecated ones). A list of the attributes and the elements they are allowed in is in section:- #5.2. Using the '$spec' argument, htmLawed can be forced to permit custom, non-standard attributes as well as custom rules for standard attributes (section:- #2.3).
+  
+  Custom `data-*` (`data-star`) attributes, where the first three characters of the value of `star` (*) after lower-casing do not equal 'xml' and the value of `star` does not have a colon (:)  or space or equal-to (=) character, are allowed in all elements.
 
   When '$config["deny_attribute"]' is not set, or set to '0', or empty ('""'), all attributes are permitted. Otherwise, '$config["deny_attribute"]' can be set as a list of comma-separated names of the denied attributes. 'on*' can be used to refer to the group of 54 potentially dangerous, script-accepting attributes like 'onblur' and 'onchange' that have 'on' at the beginning of their names (see section:- #5.2 for the full list).
 
@@ -1046,7 +1051,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 .. 3.4.2  Duplicate/invalid 'id' values ............................o
 
 
-  If '$config["unique_ids"]' is '1', htmLawed (function 'hl_tag()') removes 'id' attributes with values that are not standards-compliant (must not have a space character) or duplicate. If '$config["unique_ids"]' is a word, any duplicate but otherwise valid value will be appropriately prefixed with the word to ensure its uniqueness. The word should not have a space character.
+  If '$config["unique_ids"]' is '1', htmLawed (function 'hl_tag()') removes 'id' attributes with values that are not standards-compliant (must not have a space character) or duplicate. If '$config["unique_ids"]' is a word (without a non-word character like space), any duplicate but otherwise valid value will be appropriately prefixed with the word to ensure its uniqueness.
 
   Even if multiple inputs need to be filtered (through multiple calls to htmLawed), htmLawed ensures uniqueness of 'id' values as it uses a global variable ('$GLOBALS["hl_Ids"]' array). Further, an admin can restrict the use of certain 'id' values by presetting this variable before htmLawed is called into use. E.g.:
 
@@ -1095,43 +1100,37 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 .. 3.4.5  Lower-cased, standard attribute values ....................o
 
 
-  Optionally, for standard-compliance, htmLawed (function 'hl_tag()') lower-cases standard attribute values to give, e.g., 'input type="password"' instead of 'input type="Password"', if '$config["lc_std_val"]' is '1'. Attribute values matching those listed below for any of the elements (plus those for the 'type' attribute of 'button' or 'input') are lower-cased:
+  Optionally, for standard-compliance, htmLawed (function 'hl_tag()') lower-cases standard attribute values to give, e.g., 'input type="password"' instead of 'input type="Password"', if '$config["lc_std_val"]' is '1'. Attribute values matching those listed below for any of the elements listed further below (plus those for the 'type' attribute of 'button' or 'input') are lower-cased:
 
-    all, baseline, bottom, button, center, char, checkbox, circle, col, colgroup, cols, data, default, file, get, groups, hidden, image, justify, left, ltr, middle, none, object, password, poly, post, preserve, radio, rect, ref, reset, right, row, rowgroup, rows, rtl, submit, text, top
+    all, auto, baseline, bottom, button, captions, center, chapters, char, checkbox, circle, col, colgroup, color, cols, data, date, datetime, datetime-local, default, descriptions, email, file, get, groups, hidden, image, justify, left, ltr, metadata, middle, month, none, number, object, password, poly, post, preserve, radio, range, rect, ref, reset, right, row, rowgroup, rows, rtl, search, submit, subtitles, tel, text, top, url, week
 
-    a, area, bdo, button, col, form, img, input, object, option, optgroup, param, script, select, table, td, tfoot, th, thead, tr, xml:space
+    a, area, bdo, button, col, fieldset, form, img, input, object, ol, optgroup, option, param, script, select, table, td, textarea, tfoot, th, thead, tr, track, xml:space
 
-  The following `empty` (`minimized`) attributes are always assigned lower-cased values (same as the names):
+  The following `empty` (`minimized`) attributes are always assigned lower-cased values (same as the attribute names):
 
-    checked, compact, declare, defer, disabled, ismap, multiple, nohref, noresize, noshade, nowrap, readonly, selected
+    checkbox, checked, command, compact, declare, defer, default, disabled, ismap, itemscope, multiple, nohref, noresize, noshade, nowrap, open, radio, readonly, required, reversed, selected
 
 
 .. 3.4.6  Transformation of deprecated attributes ..................o
 
 
-  If '$config["no_deprecated_attr"]' is '0', then deprecated attributes (as per HTML 4; see appendix in section:- #5.2) are removed and, in most cases, their values are transformed to CSS style properties and added to the 'style' attributes (function 'hl_tag()'). Except for 'bordercolor' for 'table', 'tr' and 'td', the scores of proprietary attributes that were never part of any cross-browser standard are not supported.
+  If '$config["no_deprecated_attr"]' is '0', then deprecated attributes are removed and, in most cases, their values are transformed to CSS style properties and added to the 'style' attributes (function 'hl_tag()'). Except for 'bordercolor' for 'table', 'tr' and 'td', the scores of proprietary attributes that were never part of any cross-browser standard are not supported in this functionality.
 
-  *  align - for 'img' with value of 'left' or 'right', becomes, e.g., 'float: left'; for 'div' and 'table' with value 'center', becomes 'margin: auto'; all others become, e.g., 'text-align: right'
-
-  *  bgcolor - E.g., 'bgcolor="#ffffff"' becomes 'background-color: #ffffff'
-  *  border - E.g., 'height= "10"' becomes 'height: 10px'
-  *  bordercolor - E.g., 'bordercolor=#999999' becomes 'border-color: #999999;'
-  *  compact - 'font-size: 85%'
-  *  clear - E.g., 'clear="all" becomes 'clear: both'
-
-  *  height - E.g., 'height= "10"' becomes 'height: 10px' and 'height="*"' becomes 'height: auto'
-
-  *  hspace - E.g., 'hspace="10"' becomes 'margin-left: 10px; margin-right: 10px'
-  *  language - 'language="VBScript"' becomes 'type="text/vbscript"'
-  *  name - E.g., 'name="xx"' becomes 'id="xx"'
-  *  noshade - 'border-style: none; border: 0; background-color: gray; color: gray'
-  *  nowrap - 'white-space: nowrap'
-  *  size - E.g., 'size="10"' becomes 'height: 10px'
-  *  start - removed
-  *  type - E.g., 'type="i"' becomes 'list-style-type: lower-roman'
-  *  value - removed
-  *  vspace - E.g., 'vspace="10"' becomes 'margin-top: 10px; margin-bottom: 10px'
-  *  width - like 'height'
+  *  align in caption, div, h, h2, h3, h4, h5, h6, hr, img, input, legend, object, p, table - for 'img' with value of 'left' or 'right', becomes, e.g., 'float: left'; for 'div' and 'table' with value 'center', becomes 'margin: auto'; all others become, e.g., 'text-align: right'
+  *  bgcolor in table, td, th and tr - E.g., 'bgcolor="#ffffff"' becomes 'background-color: #ffffff'
+  *  border in object - E.g., 'height= "10"' becomes 'height: 10px'
+  *  bordercolor in table, td and tr - E.g., 'bordercolor=#999999' becomes 'border-color: #999999;'
+  *  compact in dl, ol and ul - 'font-size: 85%'
+  *  clear in br - E.g., 'clear="all" becomes 'clear: both'
+  *  height in td and th - E.g., 'height= "10"' becomes 'height: 10px' and 'height="*"' becomes 'height: auto'
+  *  hspace in img and object - E.g., 'hspace="10"' becomes 'margin-left: 10px; margin-right: 10px'
+  *  language in script - 'language="VBScript"' becomes 'type="text/vbscript"'
+  *  name in a, form, iframe, img and map - E.g., 'name="xx"' becomes 'id="xx"'
+  *  noshade in hr - 'border-style: none; border: 0; background-color: gray; color: gray'
+  *  nowrap in td and th - 'white-space: nowrap'
+  *  size in hr - E.g., 'size="10"' becomes 'height: 10px'
+  *  vspace in img and object - E.g., 'vspace="10"' becomes 'margin-top: 10px; margin-bottom: 10px'
+  *  width in hr, pre, td and th - like 'height'
 
   Example input:
 
@@ -1145,11 +1144,9 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
        <div align="center">
         <h3 align="right">Section</h3>
         <p align="right">Para</p>
-        <ol type="a" start="e"><li value="x">First item</li></ol>
        </div>
       </td>
       <td width="*">
-       <ol type="1"><li>First item</li></ol>
       </td>
      </tr>
     </table>
@@ -1157,7 +1154,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   And the output with '$config["no_deprecated_attr"] = 1':
 
-    <img src="j.gif" alt="image" /><img src="k.gif" alt="image" id="dad_off" />
+    <img src="j.gif" alt="image" id="dad's" /><img src="k.gif" alt="image" id="dad_off" />
     <br style="clear: left;" />
     <hr style="border-style: none; border: 0; background-color: gray; color: gray; size: 1px;" />
     <img src="i.gif" alt="image" width="10em" height="20" style="padding:5px; float: left; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; border: 1px;" id="img" />
@@ -1167,11 +1164,9 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
        <div style="margin: auto;">
         <h3 style="text-align: right;">Section</h3>
         <p style="text-align: right;">Para</p>
-        <ol style="list-style-type: lower-latin;"><li>First item</li></ol>
        </div>
       </td>
       <td style="width: auto;">
-       <ol style="list-style-type: decimal;"><li>First item</li></ol>
       </td>
      </tr>
     </table>
@@ -1179,7 +1174,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   For 'lang', deprecated in XHTML 1.1, transformation is taken care of through '$config["xml:lang"]'; see section:- #3.4.1.
 
-  The attribute 'name' is deprecated in 'form', 'iframe', and 'img', and is replaced with 'id' if an 'id' attribute doesn't exist and if the 'name' value is appropriate for 'id'. For such replacements for 'a' and 'map', for which the 'name' attribute is deprecated in XHTML 1.1, '$config["no_deprecated_attr"]' should be set to '2' (when set to '1', for these two elements, the 'name' attribute is retained).
+  The attribute 'name' is deprecated in 'form', 'iframe', and 'img', and is replaced with 'id' if an 'id' attribute doesn't exist and if the 'name' value is appropriate for 'id' (i.e., doesn't have a non-word character like space). For such replacements for 'a' and 'map', for which the 'name' attribute is deprecated in XHTML 1.1, '$config["no_deprecated_attr"]' should be set to '2' (when set to '1', for these two elements, the 'name' attribute is retained).
 
 
 -- 3.4.7  Anti-spam & 'href' ---------------------------------------o
@@ -1515,7 +1510,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   autoplay~ - audio, video
   axis - td, th
   bgcolor - embed, table^, td^, th^, tr^
-  border - img^, object^, table
+  border - img, object^, table
   bordercolor - table, td, tr
   cellpadding - table
   cellspacing - table
@@ -1637,7 +1632,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   step~ - input
   summary - table
   target - a, area, form
-  type - a, area, button, command, embed, input, li^, link, menu, object, ol, param, script, source, style, ul^
+  type - a, area, button, command, embed, input, li, link, menu, object, ol, param, script, source, style, ul
   typemustmatch~ - object
   usemap - img, input, object
   valign - col, colgroup, tbody, td, tfoot, th, thead, tr
@@ -1652,6 +1647,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   accesskey, aria-activedescendant, aria-atomic, aria-autocomplete, aria-busy, aria-checked, aria-controls, aria-describedby, aria-disabled, aria-dropeffect, aria-expanded, aria-flowto, aria-grabbed, aria-haspopup, aria-hidden, aria-invalid, aria-label, aria-labelledby, aria-level, aria-live, aria-multiline, aria-multiselectable, aria-orientation, aria-owns, aria-posinset, aria-pressed, aria-readonly, aria-relevant, aria-required, aria-selected, aria-setsize, aria-sort, aria-valuemax, aria-valuemin, aria-valuenow, aria-valuetext, class, contenteditable, contextmenu, dir, draggable, dropzone, hidden, id, inert, itemid, itemprop, itemref, itemscope, itemtype, lang, spellcheck, style, tabindex, title, translate, onabort, onblur, oncanplay, oncanplaythrough, onchange, onclick, oncontextmenu, oncuechange, ondblclick, ondrag, ondragend, ondragenter, ondragleave, ondragover, ondragstart, ondrop, ondurationchange, onemptied, onended, onerror, onfocus, oninput, oninvalid, onkeydown, onkeypress, onkeyup, onload, onloadeddata, onloadedmetadata, onloadstart, onmousedown, onmousemove, onmouseout, onmouseover, onmouseup, onmousewheel, onpause, onplay, onplaying, onprogress, onratechange, onreadystatechange, onreset, onscroll, onseeked, onseeking, onselect, onshow, onstalled, onsubmit, onsuspend, ontimeupdate, onvolumechange, onwaiting, role, translate, xmlns, xml:base, xml:lang, xml:space
 
+  Custom `data-*` attributes, where the first three characters of the value of `star` (*) after lower-casing do not equal 'xml' and the value of `star` does not have a colon (:) or space or equal-to (=) character, are allowed in all elements.
+  
 
 -- 5.3  CSS 2.1 properties accepting URLs ------------------------o
 

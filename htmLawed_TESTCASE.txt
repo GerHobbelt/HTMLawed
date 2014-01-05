@@ -1,6 +1,6 @@
 /*
-htmLawed_TESTCASE.txt, 26 May 2013
-htmLawed 1.2.beta.1, 2 June 2013
+htmLawed_TESTCASE.txt, 9 June 2013
+htmLawed 1.2.beta.2, 9 June 2013
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2+
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/beta
@@ -28,6 +28,7 @@ character encoding to Unicode/UTF-8
 <strong>Deprecated:</strong> <a id="id7" target="self" name="n">a</a>, <hr noshade="noshade" /><br />
 <strong>Casing:</strong> <a HREF=""></a><br />
 <strong>Custom:</strong> <img alt="image" my:data="portrait" /><br />
+<strong>Data-*:</strong> <a data-xml="x" data-xmnt="x" data-xmlnt="x" data-xmn:t="x" data-xmxm="x">a</a><br />
 <strong>Admin-restricted?:</strong> <a href="x" onclick="alert();"></a>
 
 <h6>Attribute values</h6>
