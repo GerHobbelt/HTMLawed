@@ -1,5 +1,11 @@
 htmLawed change-log
 
+**** 1.2.beta.1, 2 June 2013 release ****
+
+Support for these new (HTML5) elements: hgroup
+
+Corrected checking for child elements allowed within a to comply with HTML5 specification
+
 **** 1.2.beta, 26 May 2013 release ****
 
 Support for these new (HTML5) elements: article, aside, audio, bdi, canvas, command, data, datalist, details, figcaption, figure, footer, header, keygen, mark, meter, nav, output, progress, section, source, summary, time, track, video, wbr (of these, audio, canvas, and video are considered 'unsafe' elements)

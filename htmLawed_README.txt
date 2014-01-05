@@ -1,6 +1,6 @@
 /*
-htmLawed_README.txt, 26 May 2013
-htmLawed 1.12.beta, 26 May 2013
+htmLawed_README.txt, 2 June 2013
+htmLawed 1.12.beta.1, 2 June 2013
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2+
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/beta
@@ -812,11 +812,11 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   See section:- #3.3.3 for differences between the various non-zero '$config["keep_bad"]' values.
 
-  htmLawed by default permits these 116 elements of the HTML4/5 specifications:
+  htmLawed by default permits these 117 elements of the HTML4/5 specifications:
 
-    a, abbr, acronym, address, applet, area, article, aside, audio, b, bdi, bdo, big, blockquote, br, button, canvas, caption, center, cite, code, col, colgroup, command, data, datalist, dd, del, details, dfn, dir, div, dl, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hr, i, iframe, img, input, ins, isindex, kbd, keygen, label, legend, link, map, mark, menu, meta, meter, nav, noscript, object, ol, optgroup, option, output, p, param, pre, progress, q, rb, rbc, rp, rt, rtc, ruby, s, samp, script, section, select, small, source, span, strike, strong, style, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, track, tt, u, ul, var, video, wbr
+    a, abbr, acronym, address, applet, area, article, aside, audio, b, bdi, bdo, big, blockquote, br, button, canvas, caption, center, cite, code, col, colgroup, command, data, datalist, dd, del, details, dfn, dir, div, dl, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, i, iframe, img, input, ins, isindex, kbd, keygen, label, legend, link, map, mark, menu, meta, meter, nav, noscript, object, ol, optgroup, option, output, p, param, pre, progress, q, rb, rbc, rp, rt, rtc, ruby, s, samp, script, section, select, small, source, span, strike, strong, style, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, track, tt, u, ul, var, video, wbr
 
-  The HTML4 elements 'acronym', 'applet', 'big', 'center', 'dir', 'font', 'strike', and 'tt' are obsolete/deprecated in HTML5. On the other hand, the obsolete/deprecated HTML4 elements 'embed', 'menu' and 'u' are no longer so in HTML4. The new elements of HTML5 that are not in HTML4 or the Ruby specification are 'article', 'aside', 'audio', 'bdi', 'canvas', 'command', 'data', 'datalist', 'details', 'figure', 'figcaption', 'footer', 'header', 'keygen', 'link', 'mark', 'meta', 'meter', 'nav', 'output', 'progress', 'section', 'source', 'style', 'summary', 'time', 'track', 'video', and 'wbr'. The 'link', 'meta' and 'style' elements exist in HTML4 but are not allowed in the HTML body. These 16 elements are `empty` elements that have an opening tag with possible content but no element content (thus, no closing tag): 'area', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'isindex', 'keygen', 'link', 'meta', 'param', 'source', 'track', and 'wbr'. Browsers have supported 'embed' because of its wide-spread use even though it is missing in HTML4 (it is a part of HTML5). The Ruby elements 'rb', 'rbc', and 'rtc' are not in HTML5 as of April 2012, but it is likely that they will be included in the future.
+  The HTML4 elements 'acronym', 'applet', 'big', 'center', 'dir', 'font', 'strike', and 'tt' are obsolete/deprecated in HTML5. On the other hand, the obsolete/deprecated HTML4 elements 'embed', 'menu' and 'u' are no longer so in HTML4. The new elements of HTML5 that are not in HTML4 or the Ruby specification are 'article', 'aside', 'audio', 'bdi', 'canvas', 'command', 'data', 'datalist', 'details', 'figure', 'figcaption', 'footer', 'header', 'hgroup', 'keygen', 'link', 'mark', 'meta', 'meter', 'nav', 'output', 'progress', 'section', 'source', 'style', 'summary', 'time', 'track', 'video', and 'wbr'. The 'link', 'meta' and 'style' elements exist in HTML4 but are not allowed in the HTML body. These 16 elements are `empty` elements that have an opening tag with possible content but no element content (thus, no closing tag): 'area', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'isindex', 'keygen', 'link', 'meta', 'param', 'source', 'track', and 'wbr'. Browsers have supported 'embed' because of its wide-spread use even though it is missing in HTML4 (it is a part of HTML5). The Ruby elements 'rb', 'rbc', and 'rtc' are not in HTML5 as of April 2012, but it is likely that they will be included in the future.
 
   With '$config["safe"] = 1', the default set will exclude 'applet', 'audio', 'canvas', 'embed', 'iframe', 'object', 'script' and 'video'; see section:- #3.6.
 
@@ -1353,7 +1353,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   `Version number - Release date. Notes`
   
-  1.12.beta - 26 May 2013. Added support for HTML5; removed support for code using kses functions (see section:- #2.6)
+  1.12.beta - 26 May 2013. Added support for HTML5; removed support for code using kses functions (see section:- #2.6); changes in revisions to the beta version are not noted here
   
   1.1.14 - 8 August 2012. Fix for possible segmental loss of incremental indentation during 'tidying' when 'balance' is disabled; fix for non-effectuation under some circumstances of a corrective behavior to preserve plain text within elements like 'blockquote'.
   
