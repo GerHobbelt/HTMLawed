@@ -1,6 +1,6 @@
 /*
-htmLawed_README.txt, 5 July 2012
-htmLawed 1.1.12, 5 July 2012
+htmLawed_README.txt, 22 July 2012
+htmLawed 1.1.13, 22 July 2012
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2+
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed
@@ -121,6 +121,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   *  ensure *unique* 'id' attribute values  ^~`
   *  *double-quote* attribute values  ^
   *  lower-case *standard attribute values* like 'password'  ^`
+  *  permit custom, non-standard attributes as well as custom rules for standard attributes  ~`
 
   *  *attribute-specific URL protocol/scheme restriction*  *~`
   *  disable *dynamic expressions* in 'style' values  *~`
@@ -486,6 +487,12 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
   *Special characters*: The characters ';', ',', '/', '(', ')', '|', '~' and space have special meanings in the rules. Words in the rules that use such characters, or the characters themselves, should be `escaped` by enclosing in pairs of double-quotes ('"'). A back-tick ('`') can be used to escape a literal '"'. An example rule illustrating this is 'input=value(maxlen=30/match="/^\w/"/default="your `"ID`"")'.
    
   *Note*: To deny an attribute for all elements for which it is legal, '$config["deny_attribute"]' (see section:- #3.4) can be used instead of '$spec'. Also, attributes can be allowed element-specifically through '$spec' while being denied globally through '$config["deny_attribute"]'. The 'hook_tag' parameter (section:- #3.4.9) can also be used to implement the '$spec' functionality.
+  
+  '$spec' can also be used to permit custom, non-standard attributes as well as custom rules for standard attributes. Thus, the following value of '$spec' will permit the custom uses of the standard 'rel' attribute in 'input' (not permitted as per standards) and of a non-standard attribute, 'vFlag', in 'img'.
+  
+    $spec = 'img=vFlag; input=rel'
+
+  The attribute names can contain alphabets, colons (:) and hyphens (-) but must start with an alphabet.
 
 
 -- 2.4  Performance time & memory usage ----------------------------o
@@ -924,7 +931,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   An option like '1' is useful, e.g., when a writer previews his submission, whereas one like '3' is useful before content is finalized and made available to all.
 
-  *Note:* In the example above, unlike '<*>', '<xml>' gets considered as a tag (even though there is no HTML element named 'xml'). In general, text matching the regular expression pattern '<(/?)([a-zA-Z][a-zA-Z1-6]*)([^>]*?)\s?>' is considered a tag (phrase enclosed by the angled brackets '<' and '>', and starting [with an optional slash preceding] with an alphanumeric word that starts with an alphabet...).
+  *Note:* In the example above, unlike '<*>', '<xml>' gets considered as a tag (even though there is no HTML element named 'xml'). Thus, the 'keep_bad' parameter's value affects '<xml>' but not '<*>'. In general, text matching the regular expression pattern '<(/?)([a-zA-Z][a-zA-Z1-6]*)([^>]*?)\s?>' is considered a tag (phrase enclosed by the angled brackets '<' and '>', and starting [with an optional slash preceding] with an alphanumeric word that starts with an alphabet...), and is subjected to the 'keep_bad' value.
 
   Nesting/content rules for each of the 86 elements in htmLawed's default set (see section:- #3.3) are defined in function 'hl_bal()'. This means that if a non-standard element besides 'embed' is being permitted through '$config["elements"]', the element's tag content will end up getting removed if '$config["balance"]' is set to '1'.
 
@@ -966,7 +973,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 -- 3.4  Attributes ------------------------------------------------oo
 
 
-  htmLawed will only permit attributes described in the HTML specs (including deprecated ones). It also permits some attributes for use with the 'embed' element (the non-standard 'embed' element is supported in htmLawed because of its widespread use), and the the 'xml:space' attribute (valid only in XHTML 1.1). A list of such 111 attributes and the elements they are allowed in is in section:- #5.2.
+  htmLawed will only permit attributes described in the HTML specs (including deprecated ones). It also permits some attributes for use with the 'embed' element (the non-standard 'embed' element is supported in htmLawed because of its widespread use), and the the 'xml:space' attribute (valid only in XHTML 1.1). A list of such 111 attributes and the elements they are allowed in is in section:- #5.2. Using the '$spec' argument, htmLawed can be forced to permit custom, non-standard attributes as well as custom rules for standard attributes (section:- #2.3).
 
   When '$config["deny_attribute"]' is not set, or set to '0', or empty ('""'), all the 111 attributes are permitted. Otherwise, '$config["deny_attribute"]' can be set as a list of comma-separated names of the denied attributes. 'on*' can be used to refer to the group of potentially dangerous, script-accepting attributes: 'onblur', 'onchange', 'onclick', 'ondblclick', 'onfocus', 'onkeydown', 'onkeypress', 'onkeyup', 'onmousedown', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onreset', 'onselect' and 'onsubmit'.
 
@@ -1321,6 +1328,8 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   `Version number - Release date. Notes`
   
+  1.1.13 - 22 July 2012. Added feature allowing use of custom, non-standard attributes or custom rules for standard attributes
+  
   1.1.12 - 5 July 2012. Fix for a bug in identifying an unquoted value of the 'face' attribute 
   
   1.1.11 - 5 June 2012. Fix for possible problem with handling of multi-byte characters in attribute values in an mbstring.func_overload enviroment. '$config["hook_tag"]', if specified, now receives names of elements in closing tags.
@@ -1385,7 +1394,7 @@ A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/intern
 
   Upgrading is as simple as replacing the previous version of 'htmLawed.php' (assuming it was not modified for customized features). As htmLawed output is almost always used in static documents, upgrading should not affect old, finalized content.
 
-  *Important*  The following upgrades may affect the functionality of a specific htmLawed as indicated by their corresponding notes:
+  *Important*  The following upgrades may affect the functionality of a specific htmLawed installation:
 
   (1) From version 1.1-1.1.10 to 1.1.11 (or later), if a 'hook_tag' function is in use: In version 1.1.11, elements in closing tags (and not just the opening tags) are also passed to the function. There are no attribute names/values to pass, so a 'hook_tag' function receives only the element name. The 'hook_tag' function therefore may have to be edited. See section:- #3.4.9.
 
