@@ -1,7 +1,7 @@
 <?php
 
 /*
-htmLawed 1.2.beta.3, 6 August 2013
+htmLawed 1.2.beta.4, 11 September 2013
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2+
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/beta
@@ -336,7 +336,7 @@ $c = isset($C['schemes'][$c]) ? $C['schemes'][$c] : $C['schemes']['*'];
 static $d = 'denied:';
 if(isset($c['!']) && substr($p, 0, 7) != $d){$p = "$d$p";}
 if(isset($c['*']) or !strcspn($p, '#?;') or (substr($p, 0, 7) == $d)){return "{$b}{$p}{$a}";} // All ok, frag, query, param
-if(preg_match('`^([a-z\d\-+.&#; ]+?)(:|&#(58|x3a);|%3a|\\\\0{0,4}3a).`i', $p, $m) && !isset($c[strtolower($m[1])])){ // Denied prot
+if(preg_match('`^([^:?[@!$()*,=/\'\]]+?)(:|&#(58|x3a);|%3a|\\\\0{0,4}3a).`i', $p, $m) && !isset($c[strtolower($m[1])])){ // Denied prot
  return "{$b}{$d}{$p}{$a}";
 }
 if($C['abs_url']){
@@ -640,7 +640,7 @@ return '';
 function hl_tidy($t, $w, $p){
 // Tidy/compact HTM
 if(strpos(' pre,script,textarea', "$p,")){return $t;}
-$t = str_replace(' </', '</', preg_replace(array('`(<\w[^>]*(?<!/)>)\s+`', '`\s+`', '`(<\w[^>]*(?<!/)>) `'), array(' $1', ' ', '$1'), preg_replace_callback(array('`(<(!\[CDATA\[))(.+?)(\]\]>)`sm', '`(<(!--))(.+?)(-->)`sm', '`(<(pre|script|textarea)[^>]*?>)(.+?)(</\2>)`sm'), create_function('$m', 'return $m[1]. str_replace(array("<", ">", "\n", "\r", "\t", " "), array("\x01", "\x02", "\x03", "\x04", "\x05", "\x07"), $m[3]). $m[4];'), $t)));
+$t = preg_replace(array('`(<\w[^>]*(?<!/)>)\s+`', '`\s+`', '`(<\w[^>]*(?<!/)>) `'), array(' $1', ' ', '$1'), preg_replace_callback(array('`(<(!\[CDATA\[))(.+?)(\]\]>)`sm', '`(<(!--))(.+?)(-->)`sm', '`(<(pre|script|textarea)[^>]*?>)(.+?)(</\2>)`sm'), create_function('$m', 'return $m[1]. str_replace(array("<", ">", "\n", "\r", "\t", " "), array("\x01", "\x02", "\x03", "\x04", "\x05", "\x07"), $m[3]). $m[4];'), $t));
 if(($w = strtolower($w)) == -1){
  return str_replace(array("\x01", "\x02", "\x03", "\x04", "\x05", "\x07"), array('<', '>', "\n", "\r", "\t", ' '), $t);
 }
@@ -670,20 +670,20 @@ while($X){
     else{++$N; ob_end_clean(); continue 2;}
    }
    else{echo "\n", str_repeat($s, $n), "$e\n", str_repeat($s, ($x != 1 ? ++$n : $n));}
-   echo ltrim($r); continue;
+   echo $r; continue;
   }
   $f = "\n". str_repeat($s, $n);
   if(isset($c[$y])){
-   if(!$x){echo $e, $f, ltrim($r);}
+   if(!$x){echo $e, $f, $r;}
    else{echo $f, $e, $r;}
   }elseif(isset($b[$y])){echo $f, $e, $r;
-  }elseif(isset($a[$y])){echo $e, $f, ltrim($r);
-  }elseif(!$y){echo $f, $e, $f, ltrim($r);
+  }elseif(isset($a[$y])){echo $e, $f, $r;
+  }elseif(!$y){echo $f, $e, $f, $r;
   }else{echo $e, $r;}
  }
  $X = 0;
 }
-$t = preg_replace('`[\n]\s*?[\n]+`', "\n", ob_get_contents());
+$t = str_replace(array("\n ", " \n"), "\n", preg_replace('`[\n]\s*?[\n]+`', "\n", ob_get_contents()));
 ob_end_clean();
 if(($l = strpos(" $w", 'r') ? (strpos(" $w", 'n') ? "\r\n" : "\r") : 0)){
  $t = str_replace("\n", $l, $t);
@@ -694,6 +694,6 @@ return str_replace(array("\x01", "\x02", "\x03", "\x04", "\x05", "\x07"), array(
 
 function hl_version(){
 // rel
-return '1.2.beta.3';
+return '1.2.beta.4';
 // eof
 }
