@@ -1,5 +1,9 @@
 htmLawed change-log
 
+**** 1.2.beta.3, 6 August 2013 release ****
+
+Improved checking for valid nesting within the a element
+
 **** 1.2.beta.2, 9 June 2013 release ****
 
 Support for new (HTML5) element: main

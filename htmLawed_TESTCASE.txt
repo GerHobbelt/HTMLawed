@@ -1,6 +1,6 @@
 /*
-htmLawed_TESTCASE.txt, 9 June 2013
-htmLawed 1.2.beta.2, 9 June 2013
+htmLawed_TESTCASE.txt, 6 August 2013
+htmLawed 1.2.beta.3, 6 August 2013
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2+
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/beta
@@ -290,6 +290,10 @@ Find me at <a href="http://www.xy.com" itemprop="url">www.xy.com</a>
 <strong>Proprietary tag</strong>: <p class=3DMsoNormal><o:p>&nbsp;</o:p></p><br />
 <strong>XML declaration</strong>: <?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /><br />
 <strong>XML-invalid character code-point (may not replicate)</strong>: <p class=3DMsoNormal>“Where is he?” asked both Mary – the one so lovely – and Jane.</p>
+
+<h6>Nesting</h6>
+
+<strong>Block or inline a</strong>: <p><a href="link">text</a></p><a href="link"><div>hi</div></a><br />
 
 <h6>Non-English text-1</h6>
 
