@@ -1,5 +1,5 @@
 /*
-htmLawed_TESTCASE.txt, 8 August 2012
+htmLawed_TESTCASE.txt, 14 August 2012
 htmLawed 1.1.14, 8 August 2012
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2+
@@ -414,6 +414,10 @@ script:eval(document.all.mycode.expr)')">hi</a><br />
   > 3 <br />
 <._.> hi! <br />
 <<< ALERT >>> <br />
+<![if !vml]> some stuff <![endif]> <br />
+<?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /> <br />
+<uml:ns ns = "urn:www"> <br />
+<uml:ns ns = 'urn:www'> <br />
 if(13<age AND 21>age){say 'teen'} <br />
 age >51 and a smoking history of >51 pack-years <b>was</b> <br />
 age > 51 and a smoking history of >51 pack-years <b>was</b> <br />
