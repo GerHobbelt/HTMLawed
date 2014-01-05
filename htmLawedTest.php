@@ -22,7 +22,7 @@ $_sid = 'sid'; // session name; alphanum.
 $_slife = 30; // session life in min.
 
 // errors
-error_reporting(E_ALL | (defined('E_STRICT') ? E_STRICT : 1));
+error_reporting(E_ALL | (defined('E_STRICT') ? E_STRICT : 0));
 ini_set('display_errors', $_errs);
 
 // session

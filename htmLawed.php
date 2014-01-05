@@ -206,7 +206,7 @@ for($i=-1, $ci=count($t); ++$i<$ci;){
   }elseif($do > 4){echo preg_replace('`\S`', '', $x);}
  }
  // get markup
- if(!preg_match('`^(/?)([a-zA-Z1-6]+)([^>]*)>(.*)`sm', $t[$i], $r)){$x = $t[$i]; continue;}
+ if(!preg_match('`^(/?)([a-z1-6]+)([^>]*)>(.*)`sm', $t[$i], $r)){$x = $t[$i]; continue;}
  $s = null; $e = null; $a = null; $x = null; list($all, $s, $e, $a, $x) = $r;
  // close tag
  if($s){
