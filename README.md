@@ -3,7 +3,7 @@ Install
 
 Install it via composer by adding to composer.json:
 ```
-imunhatep/htmlawed: "@dev" 
+"imunhatep/htmlawed": "dev-master"
 ```
 
 
