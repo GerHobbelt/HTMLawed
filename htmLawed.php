@@ -559,7 +559,7 @@ if($depTr){
   }elseif($k == 'compact'){
    unset($a['compact']); $c[] = 'font-size: 85%';
   }elseif($k == 'height' or $k == 'width'){
-   unset($a[$k]); $c[] = $k. ': '. ($v[0] != '*' ? $v. (ctype_digit($v) ? 'px' : '') : 'auto');
+   unset($a[$k]); $c[] = $k. ': '. (($v !== '') && ($v[0] != '*') ? $v. (ctype_digit($v) ? 'px' : '') : 'auto');
   }elseif($k == 'hspace'){
    unset($a['hspace']); $c[] = "margin-left: {$v}px; margin-right: {$v}px";
   }elseif($k == 'language' && !isset($a['type'])){
