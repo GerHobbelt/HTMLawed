@@ -1,3 +1,12 @@
+Install
+===============
+
+Install it via composer by adding to composer.json:
+```
+"imunhatep/htmlawed": "dev-master"
+```
+
+
 HTMLawed is ...
 ===============
 
@@ -12,7 +21,6 @@ tidies the code, and so forth.
 
 As such it may serve as an alternative to [HTMLtidy](http://en.wikipedia.org/wiki/HTML_Tidy) in a 
 sanitation context.
-
 
 
 This repository is ...
